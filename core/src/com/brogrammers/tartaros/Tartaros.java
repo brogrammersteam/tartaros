@@ -10,6 +10,8 @@ import com.brogrammers.tartaros.screens.MenuScreen;
 public class Tartaros extends Game {
 
 	SpriteBatch batch;
+
+	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
 	
 	@Override
 	public void create () {
