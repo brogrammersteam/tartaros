@@ -4,6 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -12,8 +17,43 @@ public class MenuScreen implements Screen {
 
     private Tartaros game;
 
+    private Stage stage;
+    private Skin skin;
+    private TextButton startButton;
+    private TextButton settingButton;
+
     public MenuScreen(Tartaros game) {
         this.game = game;
+
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+        startButton = new TextButton("Start", skin);
+        settingButton = new TextButton("Settings", skin);
+
+        startButton.setSize(900,150);
+        startButton.setPosition(Tartaros.V_WIDTH /2 - 450,Tartaros.V_HEIGHT /2);
+        startButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                startButton.setText("Game Started");
+//                TODO Let the Game start by the press of this Button
+            }
+        });
+
+        settingButton.setSize(900,150);
+        settingButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 175);
+        settingButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button) {
+                settingButton.setText("Settings Started");
+//                TODO Change to the Settings Screen by the push of the Button
+            }
+        });
+
+        stage.addActor(startButton);
+        stage.addActor(settingButton);
     }
 
     @Override
@@ -24,8 +64,11 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(0,1,1,0);
+        Gdx.gl.glClearColor(0,0,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.act(delta);
+        stage.draw();
     }
 
     public void update(float delta){
