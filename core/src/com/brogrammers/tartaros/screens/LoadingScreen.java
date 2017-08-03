@@ -39,11 +39,24 @@ public class LoadingScreen implements Screen {
         TextureRegionDrawable backDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
 
+        Pixmap pixmap2 = new Pixmap(0, 20, Pixmap.Format.RGBA8888);
+        pixmap2.setColor(Color.GREEN);
+        pixmap2.fill();
+        TextureRegionDrawable knobDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap2)));
+        pixmap2.dispose();
+
+        Pixmap pixmap3 = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
+        pixmap3.setColor(Color.GREEN);
+        pixmap3.fill();
+        TextureRegionDrawable knobBeforeDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap3)));
+        pixmap3.dispose();
+
         this.progressBarStyle = new ProgressBar.ProgressBarStyle();
         this.progressBarStyle.background = backDrawable;
+        this.progressBarStyle.knob = knobDrawable;
+        this.progressBarStyle.knobBefore = knobBeforeDrawable;
 
-
-        this.progressBar = new ProgressBar(0, 100, 1, false, progressBarStyle);
+        this.progressBar = new ProgressBar(0.0f, 1.0f, 0.01f, false, progressBarStyle);
 
         stage.addActor(progressBar);
 
@@ -55,6 +68,8 @@ public class LoadingScreen implements Screen {
         System.out.println("LOADING");
 
         progressBar.setPosition((Tartaros.V_WIDTH - progressBar.getWidth()) / 2, (Tartaros.V_HEIGHT - progressBar.getHeight()) / 2 + 200);
+        progressBar.setValue(0f);
+        progressBar.setAnimateDuration(1f);
     }
 
     @Override
@@ -71,11 +86,12 @@ public class LoadingScreen implements Screen {
         handleInput();
 
         progress = game.assets.getProgress();
+        progressBar.setValue(progress);
 
         stage.act(delta);
 
-        if(game.assets.update()){
-//            game.setScreen(new PreReleaseScreen(game));
+        if(game.assets.update() && progressBar.getValue() == 1.0f){
+            game.setScreen(new PreReleaseScreen(game));
         }
     }
 
