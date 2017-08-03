@@ -42,6 +42,7 @@ public class LoadingScreen implements Screen {
         this.progressBarStyle = new ProgressBar.ProgressBarStyle();
         this.progressBarStyle.background = backDrawable;
 
+
         this.progressBar = new ProgressBar(0, 100, 1, false, progressBarStyle);
 
         stage.addActor(progressBar);
