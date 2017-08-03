@@ -31,6 +31,7 @@ public class MenuScreen implements Screen {
 
         startButton = new TextButton("Start", skin);
         settingButton = new TextButton("Settings", skin);
+        resetButton = new TextButton("Reset all", skin);
 
         startButton.setSize(900,150);
         startButton.setPosition(Tartaros.V_WIDTH /2 - 450,Tartaros.V_HEIGHT /2);
@@ -43,7 +44,7 @@ public class MenuScreen implements Screen {
         });
 
         settingButton.setSize(900,150);
-        settingButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 175);
+        settingButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 160);
         settingButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
@@ -51,9 +52,19 @@ public class MenuScreen implements Screen {
 //                TODO Change to the Settings Screen by the push of the Button
             }
         });
+        resetButton.setSize(900,150);
+        resetButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 195);
+        resetButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button) {
+                resetButton.setText("Reset all");
+//                TODO Reset the whole game
+            }
+        });
 
         stage.addActor(startButton);
         stage.addActor(settingButton);
+        stage.addActor(resetButton);
     }
 
     @Override
