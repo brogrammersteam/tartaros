@@ -69,7 +69,7 @@ public class LoadingScreen implements Screen {
 
         progressBar.setPosition((Tartaros.V_WIDTH - progressBar.getWidth()) / 2, (Tartaros.V_HEIGHT - progressBar.getHeight()) / 2 + 200);
         progressBar.setValue(0f);
-        progressBar.setAnimateDuration(1f);
+        progressBar.setAnimateDuration(0.25f);
     }
 
     @Override
@@ -92,6 +92,7 @@ public class LoadingScreen implements Screen {
 
         if(game.assets.update() && progressBar.getValue() == 1.0f){
             game.setScreen(new PreReleaseScreen(game));
+//            TODO Whole Loading Screen needs a graphical update
         }
     }
 
@@ -128,5 +129,6 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssests(){
+        game.assets.load("badlogic.jpg", Texture.class);
     }
 }

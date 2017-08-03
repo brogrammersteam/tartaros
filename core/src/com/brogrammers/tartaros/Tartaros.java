@@ -23,11 +23,13 @@ public class Tartaros extends Game {
 
     @Override
 	public void create () {
+//        Creating all the needed things
         assets = new AssetManager();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
 
+//		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
 	}
 
@@ -38,6 +40,7 @@ public class Tartaros extends Game {
 
 	@Override
 	public void dispose() {
+//        Dispose from all the Stuff
         batch.dispose();
         this.getScreen().dispose();
         assets.dispose();
