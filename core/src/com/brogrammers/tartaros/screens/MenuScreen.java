@@ -77,8 +77,7 @@ public class MenuScreen implements Screen {
         settingsButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
-                settingsButton.setText("Settings Started");
-//                TODO Let the Game start the Settings Mode
+                new SettingsScreen(game);
             }
         });
 
@@ -137,6 +136,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        skin.dispose();
     }
 }

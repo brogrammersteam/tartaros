@@ -24,7 +24,7 @@ public class SplashScreen implements Screen {
 
     private Stage stage;
 
-    private String infoString = "Please consider that this game was developed by a young group of Programmers called the BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems.";
+    private String infoString = "Please consider that this game was developed by a young group of Programmers called BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems.";
 
     private Texture splashTexture;
     private Image splashImage;
@@ -126,7 +126,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, false);
     }
 
     @Override
