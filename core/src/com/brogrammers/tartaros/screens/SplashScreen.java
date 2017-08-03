@@ -24,7 +24,7 @@ public class SplashScreen implements Screen {
 
     private Stage stage;
 
-    private String infoString = "Please consider that this game was developed by a young group of Programmers called the BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thanky you for helping us finding Bugs and Problems.";
+    private String infoString = "Please consider that this game was developed by a young group of Programmers called the BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems.";
 
     private Texture splashTexture;
     private Image splashImage;
@@ -44,18 +44,18 @@ public class SplashScreen implements Screen {
 
     public SplashScreen(Tartaros game) {
         this.game = game;
-        this.stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
+        stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
+
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Bold.ttf"));
 
         splashTexture = game.assets.get("badlogic.jpg", Texture.class);
 //        TODO Change out the Logo by our own
         splashImage = new Image(splashTexture);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Bold.ttf"));
-
 //        Setting the infoLabelParameter
         infoLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        infoLabelParameter.size = 40;
+        infoLabelParameter.size = 35;
 
 //        Setting the tapLabelParameters
         tapLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -83,14 +83,17 @@ public class SplashScreen implements Screen {
     public void show() {
         System.out.println("SHOW");
 
+//        Making the infoLabel wrapping the Text
         infoLabel.setWrap(true);
         infoLabel.setAlignment(Align.center);
-        infoLabel.setWidth(Tartaros.V_WIDTH);
+        infoLabel.setWidth(Tartaros.V_WIDTH - 200);
 
+//        Setting the Position of every Actor
         splashImage.setPosition((Tartaros.V_WIDTH - splashImage.getWidth()) / 2, (Tartaros.V_HEIGHT - splashImage.getHeight()) / 2);
         infoLabel.setPosition((Tartaros.V_WIDTH - infoLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - infoLabel.getHeight()) / 2 + 300);
-        tapLabel.setPosition((Tartaros.V_WIDTH - tapLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - tapLabel.getHeight()) / 2 - 200);
+        tapLabel.setPosition((Tartaros.V_WIDTH - tapLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - tapLabel.getHeight()) / 2 - 300);
 
+//        Adding Actions to every Actor
         splashImage.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
         infoLabel.addAction(sequence(alpha(0f), fadeIn(2f)));
         tapLabel.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
@@ -143,8 +146,12 @@ public class SplashScreen implements Screen {
 
     @Override
     public void dispose() {
+//        Disposing all the Stuff
         System.out.println("Dispose");
         splashTexture.dispose();
         stage.dispose();
+        tapLabelFont.dispose();
+        infoLabelFont.dispose();
+        generator.dispose();
     }
 }

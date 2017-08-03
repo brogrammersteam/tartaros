@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class MenuScreen implements Screen {
 
@@ -19,59 +20,77 @@ public class MenuScreen implements Screen {
 
     private Stage stage;
     private Skin skin;
-    private TextButton startButton;
-    private TextButton settingButton;
-    private TextButton resetButton;
+
+    private TextButton singlePlayerButton;
+    private TextButton multiPlayerButton;
+    private TextButton settingsButton;
+    private TextButton reportButton;
 
     public MenuScreen(Tartaros game) {
         this.game = game;
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        startButton = new TextButton("Start", skin);
-        settingButton = new TextButton("Settings", skin);
-        resetButton = new TextButton("Reset all", skin);
+        singlePlayerButton = new TextButton("Singleplayer", skin);
+        multiPlayerButton = new TextButton("Multiplayer", skin);
+        settingsButton = new TextButton("Settings", skin);
+        reportButton = new TextButton("Report to our Github Repository", skin);
 
-        startButton.setSize(900,150);
-        startButton.setPosition(Tartaros.V_WIDTH /2 - 450,Tartaros.V_HEIGHT /2);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                startButton.setText("Game Started");
-//                TODO Let the Game start by the press of this Button
-            }
-        });
-
-        settingButton.setSize(900,150);
-        settingButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 160);
-        settingButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                settingButton.setText("Settings Started");
-//                TODO Change to the Settings Screen by the push of the Button
-            }
-        });
-
-        resetButton.setSize(900,150);
-        resetButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 195);
-        resetButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                resetButton.setText("Reset all");
-//                TODO Reset the whole game
-            }
-        });
-
-        stage.addActor(startButton);
-        stage.addActor(settingButton);
-        stage.addActor(resetButton);
+        stage.addActor(singlePlayerButton);
+        stage.addActor(multiPlayerButton);
+        stage.addActor(settingsButton);
+        stage.addActor(reportButton);
     }
 
     @Override
     public void show() {
         System.out.println("MENU");
+
+        singlePlayerButton.setSize(500,100);
+        singlePlayerButton.setPosition((Tartaros.V_WIDTH - singlePlayerButton.getWidth()) /2 ,Tartaros.V_HEIGHT /2 + 200);
+        singlePlayerButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        singlePlayerButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                singlePlayerButton.setText("Game Started");
+//                TODO Let the Game start the SinglePlayer Mode
+            }
+        });
+
+        multiPlayerButton.setSize(500,100);
+        multiPlayerButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 + 75);
+        multiPlayerButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        multiPlayerButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                multiPlayerButton.setText("Game Started");
+//                TODO Let the Game start the MultiPlayer Mode
+            }
+        });
+
+        settingsButton.setSize(500, 100);
+        settingsButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 50);
+        settingsButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                settingsButton.setText("Settings Started");
+//                TODO Let the Game start the Settings Mode
+            }
+        });
+
+        reportButton.setSize(500, 100);
+        reportButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 175);
+        reportButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        reportButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                Gdx.net.openURI("https://github.com/brogrammersteam/tartaros/issues");
+            }
+        });
     }
 
     @Override
