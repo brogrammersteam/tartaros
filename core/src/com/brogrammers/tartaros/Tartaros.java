@@ -1,14 +1,12 @@
 package com.brogrammers.tartaros;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.brogrammers.tartaros.screens.MenuScreen;
-import com.brogrammers.tartaros.screens.SplashScreen;
+import com.brogrammers.tartaros.screens.LoadingScreen;
+import com.brogrammers.tartaros.screens.PreReleaseScreen;
 
 public class Tartaros extends Game {
 
@@ -21,17 +19,16 @@ public class Tartaros extends Game {
 	public OrthographicCamera camera;
 
     public SpriteBatch batch;
-
-    public BitmapFont font;
+    public AssetManager assets;
 
     @Override
 	public void create () {
+        assets = new AssetManager();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 
-		this.setScreen(new SplashScreen(this));
+		this.setScreen(new LoadingScreen(this));
 	}
 
 	@Override
@@ -43,6 +40,7 @@ public class Tartaros extends Game {
 	public void dispose() {
         batch.dispose();
         this.getScreen().dispose();
+        assets.dispose();
 		super.dispose();
 	}
 }

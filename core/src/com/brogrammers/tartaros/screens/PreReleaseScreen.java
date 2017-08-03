@@ -15,7 +15,7 @@ import com.brogrammers.tartaros.Tartaros;
 import static com.badlogic.gdx.Gdx.app;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-public class SplashScreen implements Screen {
+public class PreReleaseScreen implements Screen {
 
     private final Tartaros game;
 
@@ -38,7 +38,7 @@ public class SplashScreen implements Screen {
     private BitmapFont tapLabelFont;
     private BitmapFont versionLabelFont;
 
-    public SplashScreen(Tartaros game) {
+    public PreReleaseScreen(Tartaros game) {
         this.game = game;
         this.stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
@@ -80,13 +80,14 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
-        System.out.println("Show");
+        System.out.println("PRERELEASE");
 
 //        Setting the position of every actor
-        warningLabel.setPosition((Tartaros.V_WIDTH - warningLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - warningLabel.getHeight()) / 2 + 200);
+            warningLabel.setPosition((Tartaros.V_WIDTH - warningLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - warningLabel.getHeight()) / 2 + 200);
         tapLabel.setPosition((Tartaros.V_WIDTH - tapLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - tapLabel.getHeight()) / 2);
-        versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - versionLabel.getHeight()) / 2 - 350);
+        versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, 75);
 
+//        Adding an animation to every actor
         warningLabel.addAction(sequence(alpha(0f), fadeIn(1.5f)));
         versionLabel.addAction(sequence(alpha(0f), fadeIn(1.5f)));
         tapLabel.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
@@ -141,6 +142,7 @@ public class SplashScreen implements Screen {
         System.out.println("Dispose");
         tapLabelFont.dispose();
         warningLabelFont.dispose();
+        versionLabelFont.dispose();
         stage.dispose();
         generator.dispose();
     }

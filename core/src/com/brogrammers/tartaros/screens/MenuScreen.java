@@ -21,6 +21,7 @@ public class MenuScreen implements Screen {
     private Skin skin;
     private TextButton startButton;
     private TextButton settingButton;
+    private TextButton resetButton;
 
     public MenuScreen(Tartaros game) {
         this.game = game;
@@ -52,6 +53,7 @@ public class MenuScreen implements Screen {
 //                TODO Change to the Settings Screen by the push of the Button
             }
         });
+
         resetButton.setSize(900,150);
         resetButton.setPosition(Tartaros.V_WIDTH /2 - 450, Tartaros.V_HEIGHT /2 - 195);
         resetButton.addListener(new ClickListener() {
@@ -69,7 +71,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-
+        System.out.println("MENU");
     }
 
     @Override
