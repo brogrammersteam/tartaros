@@ -31,16 +31,22 @@ public class ImpressumScreen implements Screen {
     private Label sebastianLabel;
     private Label adrianLabel;
     private Label moritzLabel;
+    private Label sebastianJobLabel;
+    private Label adrianJobLabel;
+    private Label moritzJobLabel;
 
     private Label.LabelStyle headerLabelStyle;
     private Label.LabelStyle developerLabelStyle;
+    private Label.LabelStyle jobLabelStyle;
 
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter headerLabelParameter;
     private FreeTypeFontGenerator.FreeTypeFontParameter developerLabelParameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter jobLabelParameter;
 
     private BitmapFont headerLabelFont;
     private BitmapFont developerLabelFont;
+    private BitmapFont jobLabelFont;
 
     public ImpressumScreen(final Tartaros game){
         this.game = game;
@@ -62,16 +68,26 @@ public class ImpressumScreen implements Screen {
         developerLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         developerLabelParameter.size = 50;
 
+        jobLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        jobLabelParameter.size = 30;
+
         headerLabelFont = generator.generateFont(headerLabelParameter);
         developerLabelFont = generator.generateFont(developerLabelParameter);
+        jobLabelFont = generator.generateFont(jobLabelParameter);
 
         headerLabelStyle = new Label.LabelStyle(headerLabelFont, new Color(1, 1, 1, 1));
         developerLabelStyle = new Label.LabelStyle(developerLabelFont, new Color(1,1,1,1));
+        jobLabelStyle = new Label.LabelStyle(jobLabelFont, new Color(1,1,1,1));
 
         headerLabel = new Label("Created by:", headerLabelStyle);
+
         sebastianLabel = new Label("Sebastian Schmailzl", developerLabelStyle);
         adrianLabel = new Label("Adrian Beckmann", developerLabelStyle);
         moritzLabel = new Label("Moritz Wachter", developerLabelStyle);
+
+        sebastianJobLabel = new Label("Master of Code", jobLabelStyle);
+        adrianJobLabel = new Label("Master of Design", jobLabelStyle);
+        moritzJobLabel = new Label("Master of Desaster", jobLabelStyle);
 
         stage.addActor(backgroundImage);
         stage.addActor(table);
@@ -93,6 +109,10 @@ public class ImpressumScreen implements Screen {
         table.add(sebastianLabel).expandX().padTop(100).center();
         table.add(adrianLabel).expandX().padTop(100).center();
         table.add(moritzLabel).expandX().padTop(100).center();
+        table.row();
+        table.add(sebastianJobLabel).expandX().padTop(50).center();
+        table.add(adrianJobLabel).expandX().padTop(50).center();
+        table.add(moritzJobLabel).expandX().padTop(50).center();
     }
 
     @Override
