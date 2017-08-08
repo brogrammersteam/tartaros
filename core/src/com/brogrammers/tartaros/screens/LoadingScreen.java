@@ -46,7 +46,7 @@ public class LoadingScreen implements Screen {
         this.stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
-        this.backgroundTexture = new Texture(Gdx.files.internal("graphics/loading_background.png"));
+        this.backgroundTexture = new Texture(Gdx.files.internal("graphics/loading_background21.png"));
         this.backgoundImage = new Image(backgroundTexture);
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
@@ -73,7 +73,7 @@ public class LoadingScreen implements Screen {
         backgoundImage.setPosition(0, 0);
         backgoundImage.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
-        loadingLabel.setPosition((Tartaros.V_WIDTH - loadingLabel.getWidth()) / 2, 300);
+        loadingLabel.setPosition((Tartaros.V_WIDTH - loadingLabel.getWidth()) / 2, 200);
         loadingLabel.addAction(sequence(alpha(Tartaros.alphaStart), forever(sequence(fadeIn(1f), fadeOut(1f)))));
 
     }
@@ -96,7 +96,7 @@ public class LoadingScreen implements Screen {
         stage.act(delta);
 
         if(game.assets.update()){
-            game.setScreen(new PreReleaseScreen(game));
+//            game.setScreen(new PreReleaseScreen(game));
 //            TODO Whole Loading Screen needs a graphical update
         }
     }
