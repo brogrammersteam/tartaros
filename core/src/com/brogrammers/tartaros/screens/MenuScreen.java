@@ -3,6 +3,7 @@ package com.brogrammers.tartaros.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -38,9 +39,9 @@ public class MenuScreen implements Screen {
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin(Gdx.files.internal("skin/menu/menu.json"));
+        skin = game.assets.get("skin/menu/menu.json", Skin.class);
 
-        backgroundTexture = game.assets.get("graphics/background_menu.png", Texture.class);
+        backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
 
         singlePlayerButton = new TextButton("Singleplayer", skin);

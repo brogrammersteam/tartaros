@@ -3,14 +3,18 @@ package com.brogrammers.tartaros.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -133,6 +137,8 @@ public class LoadingScreen implements Screen {
 
     private void queueAssests(){
         game.assets.load("badlogic.jpg", Texture.class);
-        game.assets.load("graphics/background_menu.png", Texture.class);
+        game.assets.load("graphics/background_menu_new.png", Texture.class);
+        game.assets.load("skin/menu/menu.atlas", TextureAtlas.class);
+        game.assets.load("skin/menu/menu.json", Skin.class, new SkinLoader.SkinParameter("skin/menu/menu.atlas"));
     }
 }

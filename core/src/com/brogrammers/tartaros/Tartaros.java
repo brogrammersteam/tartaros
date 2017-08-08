@@ -17,7 +17,7 @@ public class Tartaros extends Game {
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
 
-	public static final float VERSION = 0.1f;
+	public static final float VERSION = 0.2f;
 	public static final float alphaStart = 0f;
 	public static final float fadeTime = 1.75f;
 
