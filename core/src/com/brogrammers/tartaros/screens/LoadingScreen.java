@@ -5,20 +5,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class LoadingScreen implements Screen {
 
@@ -31,6 +29,15 @@ public class LoadingScreen implements Screen {
     private Texture backgroundTexture;
     private Image backgoundImage;
 
+    private Label loadingLabel;
+
+    private Label.LabelStyle loadingLabelStyle;
+
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter loadingLabelParameter;
+
+    private BitmapFont loadingLabelFont;
+
     public LoadingScreen(Tartaros game) {
 
         this.game = game;
@@ -42,7 +49,19 @@ public class LoadingScreen implements Screen {
         this.backgroundTexture = new Texture(Gdx.files.internal("graphics/loading_background.png"));
         this.backgoundImage = new Image(backgroundTexture);
 
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
+
+        loadingLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        loadingLabelParameter.size = 25;
+
+        loadingLabelFont = generator.generateFont(loadingLabelParameter);
+
+        loadingLabelStyle = new Label.LabelStyle(loadingLabelFont, new Color(1, 1, 1, 1));
+
+        loadingLabel = new Label("Loading ...", loadingLabelStyle);
+
         stage.addActor(backgoundImage);
+        stage.addActor(loadingLabel);
 
         queueAssests();
     }
@@ -53,6 +72,10 @@ public class LoadingScreen implements Screen {
 
         backgoundImage.setPosition(0, 0);
         backgoundImage.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+
+        loadingLabel.setPosition((Tartaros.V_WIDTH - loadingLabel.getWidth()) / 2, 300);
+        loadingLabel.addAction(sequence(alpha(Tartaros.alphaStart), forever(sequence(fadeIn(1f), fadeOut(1f)))));
+
     }
 
     @Override
@@ -68,12 +91,12 @@ public class LoadingScreen implements Screen {
     private void update(float delta){
         handleInput();
 
-        progress = game.assets.getProgress();
+        progress = game.assets.getProgress()*360;
 
         stage.act(delta);
 
         if(game.assets.update()){
-//            game.setScreen(new PreReleaseScreen(game));
+            game.setScreen(new PreReleaseScreen(game));
 //            TODO Whole Loading Screen needs a graphical update
         }
     }

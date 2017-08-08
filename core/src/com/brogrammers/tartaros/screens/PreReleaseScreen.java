@@ -43,7 +43,7 @@ public class PreReleaseScreen implements Screen {
         this.stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Bold.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
 
 //        Setting the warningLabelParameter
         warningLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
