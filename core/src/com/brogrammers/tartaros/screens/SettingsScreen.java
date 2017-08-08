@@ -41,9 +41,9 @@ public class SettingsScreen implements Screen {
         table = new Table();
         table.setFillParent(true);
 
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("skin/menu/menu.json"));
 
-        languages = new String[]{"German", "English"};
+        languages = new String[]{"German", "English", "Bayrisch"};
 
         languageSelectBox = new SelectBox<String>(skin);
         languageSelectBox.setItems(languages);
