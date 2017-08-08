@@ -17,4 +17,4 @@ werden jedoch keine Pull Requests einfügen.
 
 
 
-Bitte beachten:      Dieses Projekt ist NICHT Open Source! Bitte für jegliche Nutzung des Codes bei uns Anfragen.
+Bitte beachten: Dieses Projekt ist NICHT Open Source! Bitte für jegliche Nutzung des Codes bei uns Anfragen.
