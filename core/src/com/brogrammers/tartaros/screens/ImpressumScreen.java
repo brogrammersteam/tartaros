@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -24,6 +25,9 @@ public class ImpressumScreen implements Screen {
     private Stage stage;
     private Table table;
 
+    private String impressumText = "Dies ist ein Projekt, welches uns sehr am Herzen liegt. Es entsteht, dank der Code+Design Initiative! Wir möchten ein Spiel entwickeln, welches so ergreifend ist, dass man es nicht mehr loslassen möchte. Man soll darin so gefangen sein wie im Tartaros, der mystischen Unterwelt der Götterwelt des antiken Griechenlands. Die Kernfrage ist: Beobachtet dich Tartaros oder beobachtest du Ihn?";
+    private String thanksText = "Ein riesen Dankeschön geht hierbei an die Code+Design Initiative.";
+
     private Texture backgroundTexture;
     private Image backgroundImage;
 
@@ -34,19 +38,27 @@ public class ImpressumScreen implements Screen {
     private Label sebastianJobLabel;
     private Label adrianJobLabel;
     private Label moritzJobLabel;
+    private Label textLabel;
+    private Label thanksLabel;
 
     private Label.LabelStyle headerLabelStyle;
     private Label.LabelStyle developerLabelStyle;
     private Label.LabelStyle jobLabelStyle;
+    private Label.LabelStyle textLabelStyle;
+    private Label.LabelStyle thanksLabelStyle;
 
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter headerLabelParameter;
     private FreeTypeFontGenerator.FreeTypeFontParameter developerLabelParameter;
     private FreeTypeFontGenerator.FreeTypeFontParameter jobLabelParameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter textLabelParameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter thanksLabelParameter;
 
     private BitmapFont headerLabelFont;
     private BitmapFont developerLabelFont;
     private BitmapFont jobLabelFont;
+    private BitmapFont textLabelFont;
+    private BitmapFont thanksLabelFont;
 
     public ImpressumScreen(final Tartaros game){
         this.game = game;
@@ -71,13 +83,23 @@ public class ImpressumScreen implements Screen {
         jobLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         jobLabelParameter.size = 30;
 
+        textLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        textLabelParameter.size = 30;
+
+        thanksLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        thanksLabelParameter.size = 35;
+
         headerLabelFont = generator.generateFont(headerLabelParameter);
         developerLabelFont = generator.generateFont(developerLabelParameter);
         jobLabelFont = generator.generateFont(jobLabelParameter);
+        textLabelFont = generator.generateFont(textLabelParameter);
+        thanksLabelFont = generator.generateFont(thanksLabelParameter);
 
         headerLabelStyle = new Label.LabelStyle(headerLabelFont, new Color(1, 1, 1, 1));
         developerLabelStyle = new Label.LabelStyle(developerLabelFont, new Color(1,1,1,1));
         jobLabelStyle = new Label.LabelStyle(jobLabelFont, new Color(1,1,1,1));
+        textLabelStyle = new Label.LabelStyle(textLabelFont, new Color(1,1,1,1));
+        thanksLabelStyle = new Label.LabelStyle(thanksLabelFont, new Color(1,1,1,1));
 
         headerLabel = new Label("Created by:", headerLabelStyle);
 
@@ -89,6 +111,9 @@ public class ImpressumScreen implements Screen {
         adrianJobLabel = new Label("Master of Design", jobLabelStyle);
         moritzJobLabel = new Label("Master of Desaster", jobLabelStyle);
 
+        textLabel = new Label(impressumText, textLabelStyle);
+        thanksLabel = new Label(thanksText, thanksLabelStyle);
+
         stage.addActor(backgroundImage);
         stage.addActor(table);
     }
@@ -99,6 +124,14 @@ public class ImpressumScreen implements Screen {
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
+
+        textLabel.setWrap(true);
+        textLabel.setAlignment(Align.center);
+        textLabel.setWidth(Tartaros.V_WIDTH - 100);
+
+        thanksLabel.setWrap(true);
+        thanksLabel.setAlignment(Align.center);
+        thanksLabel.setWidth(Tartaros.V_WIDTH - 100);
 
         table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
@@ -113,6 +146,10 @@ public class ImpressumScreen implements Screen {
         table.add(sebastianJobLabel).expandX().padTop(50).center();
         table.add(adrianJobLabel).expandX().padTop(50).center();
         table.add(moritzJobLabel).expandX().padTop(50).center();
+        table.row();
+        table.add(textLabel).width(Tartaros.V_WIDTH).expandX().padTop(75).center().colspan(3);
+        table.row();
+        table.add(thanksLabel).width(Tartaros.V_WIDTH).expandX().padTop(50).center().colspan(3);
     }
 
     @Override
