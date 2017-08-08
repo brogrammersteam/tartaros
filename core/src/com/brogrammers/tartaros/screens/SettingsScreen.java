@@ -3,14 +3,12 @@ package com.brogrammers.tartaros.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -30,6 +28,9 @@ public class SettingsScreen implements Screen {
 
     private String[] languages;
 
+    private Texture backgroundTexture;
+    private Image backgroundImage;
+
     private TextButton resetButton;
     private TextButton impressumButton;
 
@@ -40,8 +41,12 @@ public class SettingsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
+        table.setDebug(Tartaros.DEBUG);
 
-        skin = new Skin(Gdx.files.internal("skin/menu/menu.json"));
+        skin = game.assets.get("skin/menu/menu.json", Skin.class);
+
+        backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
+        backgroundImage = new Image(backgroundTexture);
 
         languages = new String[]{"German", "English", "Bayrisch"};
 
@@ -51,12 +56,20 @@ public class SettingsScreen implements Screen {
         resetButton = new TextButton("Reset Game", skin);
         impressumButton = new TextButton("Created by", skin);
 
+
+        stage.addActor(backgroundImage);
         stage.addActor(table);
     }
 
     @Override
     public void show() {
         System.out.println("SETTINGS");
+
+        backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
+        backgroundImage.setPosition(0,0);
+
+        resetButton.getLabel().setAlignment(Align.center);
+        impressumButton.getLabel().setAlignment(Align.center);
 
         impressumButton.addListener(new ClickListener() {
             @Override
@@ -77,9 +90,6 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(.25f,.25f,.25f,1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         update(delta);
 
         stage.draw();

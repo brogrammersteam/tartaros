@@ -3,14 +3,15 @@ package com.brogrammers.tartaros.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -22,8 +23,18 @@ public class MenuScreen implements Screen {
     private Tartaros game;
 
     private Stage stage;
+    private Table table;
 
     private Skin skin;
+
+    private Label titleLabel;
+
+    private Label.LabelStyle titleLabelStyle;
+
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter titleLabelParameter;
+
+    private BitmapFont titleLabelFont;
 
     private Texture backgroundTexture;
     private Image backgroundImage;
@@ -38,11 +49,26 @@ public class MenuScreen implements Screen {
 
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        table.setFillParent(true);
+        table.setDebug(Tartaros.DEBUG);
 
         skin = game.assets.get("skin/menu/menu.json", Skin.class);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
+
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
+
+        titleLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        titleLabelParameter.size = 200;
+
+        titleLabelFont = generator.generateFont(titleLabelParameter);
+
+        titleLabelStyle = new Label.LabelStyle(titleLabelFont, new Color(1,1,1,1));
+
+        titleLabel = new Label("Tartaros", titleLabelStyle);
+        titleLabel.setAlignment(Align.center);
 
         singlePlayerButton = new TextButton("Singleplayer", skin);
         multiPlayerButton = new TextButton("Multiplayer", skin);
@@ -50,10 +76,7 @@ public class MenuScreen implements Screen {
         reportButton = new TextButton("Report to Github", skin);
 
         stage.addActor(backgroundImage);
-        stage.addActor(singlePlayerButton);
-        stage.addActor(multiPlayerButton);
-        stage.addActor(settingsButton);
-        stage.addActor(reportButton);
+        stage.addActor(table);
     }
 
     @Override
@@ -62,11 +85,26 @@ public class MenuScreen implements Screen {
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
-        backgroundImage.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
-        singlePlayerButton.setSize(500,100);
-        singlePlayerButton.setPosition((Tartaros.V_WIDTH - singlePlayerButton.getWidth()) /2 ,Tartaros.V_HEIGHT /2 + 200);
-        singlePlayerButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        singlePlayerButton.getLabel().setAlignment(Align.center);
+        multiPlayerButton.getLabel().setAlignment(Align.center);
+        settingsButton.getLabel().setAlignment(Align.center);
+        reportButton.getLabel().setAlignment(Align.center);
+
+        table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        table.bottom();
+
+        table.row();
+        table.add(titleLabel).expandX().width(Tartaros.V_WIDTH - 100).height(300).center().padBottom(175);
+        table.row();
+        table.add(singlePlayerButton).expandX().width(500).height(100).center().padBottom(50);
+        table.row();
+        table.add(multiPlayerButton).expandX().width(500).height(100).center().padBottom(50);
+        table.row();
+        table.add(settingsButton).expandX().width(500).height(100).center().padBottom(50);
+        table.row();
+        table.add(reportButton).expandX().width(500).height(100).center().padBottom(90);
+
         singlePlayerButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -75,9 +113,6 @@ public class MenuScreen implements Screen {
             }
         });
 
-        multiPlayerButton.setSize(500,100);
-        multiPlayerButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 + 75);
-        multiPlayerButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         multiPlayerButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -86,9 +121,6 @@ public class MenuScreen implements Screen {
             }
         });
 
-        settingsButton.setSize(500, 100);
-        settingsButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 50);
-        settingsButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         settingsButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -96,9 +128,7 @@ public class MenuScreen implements Screen {
             }
         });
 
-        reportButton.setSize(500, 100);
-        reportButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 175);
-        reportButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+
         reportButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -122,7 +152,6 @@ public class MenuScreen implements Screen {
     public void handleInput(){
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             app.exit();
-            //closes app use to exit from fullscreen mode while developing
         }
 
     }

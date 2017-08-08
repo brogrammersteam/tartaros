@@ -4,21 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
-import sun.security.util.BitArray;
 
 import static com.badlogic.gdx.Gdx.app;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class ImpressumScreen implements Screen {
 
@@ -26,6 +23,9 @@ public class ImpressumScreen implements Screen {
 
     private Stage stage;
     private Table table;
+
+    private Texture backgroundTexture;
+    private Image backgroundImage;
 
     private Label headerLabel;
     private Label sebastianLabel;
@@ -49,6 +49,10 @@ public class ImpressumScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
+        table.setDebug(Tartaros.DEBUG);
+
+        backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
+        backgroundImage = new Image(backgroundTexture);
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
 
@@ -67,7 +71,9 @@ public class ImpressumScreen implements Screen {
         headerLabel = new Label("Created by:", headerLabelStyle);
         sebastianLabel = new Label("Sebastian Schmailzl", developerLabelStyle);
         adrianLabel = new Label("Adrian Beckmann", developerLabelStyle);
+        moritzLabel = new Label("Moritz Wachter", developerLabelStyle);
 
+        stage.addActor(backgroundImage);
         stage.addActor(table);
     }
 
@@ -75,20 +81,22 @@ public class ImpressumScreen implements Screen {
     public void show() {
         System.out.println("IMPRESSUM");
 
+        backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
+        backgroundImage.setPosition(0,0);
+
         table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
         table.top();
-        table.add(headerLabel).expandX().padTop(20).height(100).width(300);
         table.row();
-        table.add(sebastianLabel).expandX().padTop(100).height(100).width(200);
-        table.add(adrianLabel).expandX().padTop(100).height(100).width(200);
+        table.add(headerLabel).expandX().padTop(20).center().colspan(3);
+        table.row();
+        table.add(sebastianLabel).expandX().padTop(100).center();
+        table.add(adrianLabel).expandX().padTop(100).center();
+        table.add(moritzLabel).expandX().padTop(100).center();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.25f,0.25f,0.25f,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         update(delta);
 
         stage.draw();

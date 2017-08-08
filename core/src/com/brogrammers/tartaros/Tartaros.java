@@ -5,10 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.brogrammers.tartaros.screens.LoadingScreen;
-import com.brogrammers.tartaros.screens.PreReleaseScreen;
 
 public class Tartaros extends Game {
 
@@ -16,6 +14,8 @@ public class Tartaros extends Game {
 
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
+
+    public static final boolean DEBUG = false;
 
 	public static final float VERSION = 0.2f;
 	public static final float alphaStart = 0f;
