@@ -47,7 +47,7 @@ public class SplashScreen implements Screen {
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Bold.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
 
         splashTexture = game.assets.get("badlogic.jpg", Texture.class);
 //        TODO Change out the Logo by our own
