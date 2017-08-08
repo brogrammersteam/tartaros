@@ -100,7 +100,7 @@ com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
 		font: Fiolex_Mephisto
 		fontColor: white
-		background: button22
+		background: button2211
 		scrollStyle: default
 		listStyle: default
 		backgroundOpen: button_pushed
