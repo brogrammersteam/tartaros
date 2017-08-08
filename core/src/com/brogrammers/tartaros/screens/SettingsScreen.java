@@ -28,6 +28,8 @@ public class SettingsScreen implements Screen {
 
     private String[] languages;
 
+    private Dialog resetDialog;
+
     private Texture backgroundTexture;
     private Image backgroundImage;
 
@@ -44,6 +46,8 @@ public class SettingsScreen implements Screen {
         table.setDebug(Tartaros.DEBUG);
 
         skin = game.assets.get("skin/menu/menu.json", Skin.class);
+
+        resetDialog = new Dialog("Reset Game", skin);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -76,6 +80,13 @@ public class SettingsScreen implements Screen {
             public void touchUp(InputEvent e, float x, float y, int point, int button){
             game.setScreen(new ImpressumScreen(game));
 //                TODO Let the Game start the SinglePlayer Mode
+            }
+        });
+
+        resetButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                resetDialog.show(stage);
             }
         });
 
