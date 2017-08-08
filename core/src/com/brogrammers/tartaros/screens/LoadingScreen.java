@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -96,8 +95,7 @@ public class LoadingScreen implements Screen {
         stage.act(delta);
 
         if(game.assets.update()){
-//            game.setScreen(new PreReleaseScreen(game));
-//            TODO Whole Loading Screen needs a graphical update
+            game.setScreen(new PreReleaseScreen(game));
         }
     }
 
