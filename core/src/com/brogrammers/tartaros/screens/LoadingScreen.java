@@ -9,12 +9,16 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 public class LoadingScreen implements Screen {
 
@@ -24,41 +28,21 @@ public class LoadingScreen implements Screen {
 
     private float progress;
 
-    private ProgressBar progressBar;
-    private ProgressBar.ProgressBarStyle progressBarStyle;
+    private Texture backgroundTexture;
+    private Image backgoundImage;
 
     public LoadingScreen(Tartaros game) {
 
         this.game = game;
         this.progress = 0f;
+
         this.stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
+        Gdx.input.setInputProcessor(stage);
 
-        Pixmap pixmap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
-        pixmap.fill();
-        TextureRegionDrawable backDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
+        this.backgroundTexture = new Texture(Gdx.files.internal("graphics/loading_background.png"));
+        this.backgoundImage = new Image(backgroundTexture);
 
-        Pixmap pixmap2 = new Pixmap(0, 20, Pixmap.Format.RGBA8888);
-        pixmap2.setColor(Color.GREEN);
-        pixmap2.fill();
-        TextureRegionDrawable knobDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap2)));
-        pixmap2.dispose();
-
-        Pixmap pixmap3 = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
-        pixmap3.setColor(Color.GREEN);
-        pixmap3.fill();
-        TextureRegionDrawable knobBeforeDrawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap3)));
-        pixmap3.dispose();
-
-        this.progressBarStyle = new ProgressBar.ProgressBarStyle();
-        this.progressBarStyle.background = backDrawable;
-        this.progressBarStyle.knob = knobDrawable;
-        this.progressBarStyle.knobBefore = knobBeforeDrawable;
-
-        this.progressBar = new ProgressBar(0.0f, 1.0f, 0.01f, false, progressBarStyle);
-
-        stage.addActor(progressBar);
+        stage.addActor(backgoundImage);
 
         queueAssests();
     }
@@ -67,9 +51,8 @@ public class LoadingScreen implements Screen {
     public void show() {
         System.out.println("LOADING");
 
-        progressBar.setPosition((Tartaros.V_WIDTH - progressBar.getWidth()) / 2, (Tartaros.V_HEIGHT - progressBar.getHeight()) / 2 + 200);
-        progressBar.setValue(0f);
-        progressBar.setAnimateDuration(0.25f);
+        backgoundImage.setPosition(0, 0);
+        backgoundImage.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
     }
 
     @Override
@@ -86,12 +69,11 @@ public class LoadingScreen implements Screen {
         handleInput();
 
         progress = game.assets.getProgress();
-        progressBar.setValue(progress);
 
         stage.act(delta);
 
-        if(game.assets.update() && progressBar.getValue() == 1.0f){
-            game.setScreen(new PreReleaseScreen(game));
+        if(game.assets.update()){
+//            game.setScreen(new PreReleaseScreen(game));
 //            TODO Whole Loading Screen needs a graphical update
         }
     }
@@ -130,5 +112,6 @@ public class LoadingScreen implements Screen {
 
     private void queueAssests(){
         game.assets.load("badlogic.jpg", Texture.class);
+        game.assets.load("graphics/background_menu.png", Texture.class);
     }
 }

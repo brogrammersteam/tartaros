@@ -1,16 +1,18 @@
 package com.brogrammers.tartaros.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
+import static com.badlogic.gdx.Gdx.app;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class SettingsScreen implements Screen {
@@ -18,49 +20,49 @@ public class SettingsScreen implements Screen {
     private Tartaros game;
 
     private Stage stage;
+    private Table table;
 
-    private Label infoLabel;
+    private Skin skin;
 
-    private Label.LabelStyle infoLabelStyle;
+    private SelectBox languageSelectBox;
 
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter infoLabelParameter;
+    private String[] languages;
 
-    private BitmapFont infoLabelFont;
+    private TextButton resetButton;
+    private TextButton impressumButton;
 
     public SettingsScreen(Tartaros game) {
         this.game = game;
 
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        table.setFillParent(true);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Bold.ttf"));
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-//        Setting the warningLabelParameter
-        infoLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        infoLabelParameter.size = 50;
+        languages = new String[]{"German", "English"};
 
-//        Generating all the Label Fonts
-        infoLabelFont = generator.generateFont(infoLabelParameter);
+        languageSelectBox = new SelectBox<String>(skin);
+        languageSelectBox.setItems(languages);
 
-//        Initialising all the Label Sytles
-        infoLabelStyle = new Label.LabelStyle(infoLabelFont, new Color(1, 1, 1, 1));
+        resetButton = new TextButton("Reset Game", skin);
+        impressumButton = new TextButton("Impressum", skin);
 
-//        Initialising all the Labels
-        infoLabel = new Label("The Settings Screen is still under development.", infoLabelStyle);
-
-        stage.addActor(infoLabel);
+        stage.addActor(table);
     }
 
     @Override
     public void show() {
         System.out.println("SETTINGS");
 
-//        Setting the position of every actor
-        infoLabel.setPosition((Tartaros.V_WIDTH - infoLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - infoLabel.getHeight()) / 2);
+        table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
-//        Adding an animation to every actor
-        infoLabel.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
+        table.add(languageSelectBox).expandX().padTop(20).height(100).width(300);
+        table.row();
+        table.add(resetButton).expandX().padTop(20).height(100).width(300);
+        table.row();
+        table.add(impressumButton).expandX().padTop(20).height(100).width(300);
     }
 
     @Override
@@ -80,7 +82,9 @@ public class SettingsScreen implements Screen {
     }
 
     private void handleInput(){
-
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            app.exit();
+        }
     }
 
     @Override

@@ -94,9 +94,9 @@ public class SplashScreen implements Screen {
         tapLabel.setPosition((Tartaros.V_WIDTH - tapLabel.getWidth()) / 2, (Tartaros.V_HEIGHT - tapLabel.getHeight()) / 2 - 300);
 
 //        Adding Actions to every Actor
-        splashImage.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
-        infoLabel.addAction(sequence(alpha(0f), fadeIn(2f)));
-        tapLabel.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
+        splashImage.addAction(sequence(alpha(Tartaros.alphaStart), forever(sequence(fadeIn(Tartaros.fadeTime), fadeOut(Tartaros.fadeTime)))));
+        infoLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        tapLabel.addAction(sequence(alpha(Tartaros.alphaStart), forever(sequence(fadeIn(Tartaros.fadeTime), fadeOut(Tartaros.fadeTime)))));
     }
 
     @Override

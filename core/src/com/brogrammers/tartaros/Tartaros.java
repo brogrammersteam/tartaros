@@ -1,6 +1,8 @@
 package com.brogrammers.tartaros;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,14 +14,18 @@ public class Tartaros extends Game {
 
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
 
-	public static final float VERSION = 0.1f;
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
+
+	public static final float VERSION = 0.1f;
+	public static final float alphaStart = 0f;
+	public static final float fadeTime = 1.75f;
 
 	public OrthographicCamera camera;
 
     public SpriteBatch batch;
     public AssetManager assets;
+    public Preferences mainSettings;
 
     @Override
 	public void create () {
@@ -28,6 +34,7 @@ public class Tartaros extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
+		mainSettings = Gdx.app.getPreferences("Settings");
 
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));

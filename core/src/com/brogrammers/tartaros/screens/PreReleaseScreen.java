@@ -88,9 +88,9 @@ public class PreReleaseScreen implements Screen {
         versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, 75);
 
 //        Adding an animation to every actor
-        warningLabel.addAction(sequence(alpha(0f), fadeIn(1.5f)));
-        versionLabel.addAction(sequence(alpha(0f), fadeIn(1.5f)));
-        tapLabel.addAction(sequence(alpha(0f), forever(sequence(fadeIn(1.5f), fadeOut(1.5f)))));
+        warningLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        versionLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        tapLabel.addAction(sequence(alpha(Tartaros.alphaStart), forever(sequence(fadeIn(Tartaros.fadeTime), fadeOut(Tartaros.fadeTime)))));
     }
 
     @Override

@@ -3,12 +3,14 @@ package com.brogrammers.tartaros.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -19,7 +21,11 @@ public class MenuScreen implements Screen {
     private Tartaros game;
 
     private Stage stage;
+
     private Skin skin;
+
+    private Texture backgroundTexture;
+    private Image backgroundImage;
 
     private TextButton singlePlayerButton;
     private TextButton multiPlayerButton;
@@ -29,16 +35,20 @@ public class MenuScreen implements Screen {
     public MenuScreen(Tartaros game) {
         this.game = game;
 
-        stage = new Stage();
+        stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+        backgroundTexture = game.assets.get("graphics/background_menu.png", Texture.class);
+        backgroundImage = new Image(backgroundTexture);
 
         singlePlayerButton = new TextButton("Singleplayer", skin);
         multiPlayerButton = new TextButton("Multiplayer", skin);
         settingsButton = new TextButton("Settings", skin);
         reportButton = new TextButton("Report to our Github Repository", skin);
 
+        stage.addActor(backgroundImage);
         stage.addActor(singlePlayerButton);
         stage.addActor(multiPlayerButton);
         stage.addActor(settingsButton);
@@ -49,9 +59,13 @@ public class MenuScreen implements Screen {
     public void show() {
         System.out.println("MENU");
 
+        backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
+        backgroundImage.setPosition(0,0);
+        backgroundImage.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+
         singlePlayerButton.setSize(500,100);
         singlePlayerButton.setPosition((Tartaros.V_WIDTH - singlePlayerButton.getWidth()) /2 ,Tartaros.V_HEIGHT /2 + 200);
-        singlePlayerButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        singlePlayerButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         singlePlayerButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -62,7 +76,7 @@ public class MenuScreen implements Screen {
 
         multiPlayerButton.setSize(500,100);
         multiPlayerButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 + 75);
-        multiPlayerButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        multiPlayerButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         multiPlayerButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -73,17 +87,17 @@ public class MenuScreen implements Screen {
 
         settingsButton.setSize(500, 100);
         settingsButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 50);
-        settingsButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        settingsButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         settingsButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
-                new SettingsScreen(game);
+                game.setScreen(new SettingsScreen(game));
             }
         });
 
         reportButton.setSize(500, 100);
         reportButton.setPosition((Tartaros.V_WIDTH - multiPlayerButton.getWidth()) / 2, Tartaros.V_HEIGHT / 2 - 175);
-        reportButton.addAction(sequence(alpha(0f), fadeIn(2f)));
+        reportButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         reportButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -95,8 +109,6 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(0.25f,0.25f,0.25f,1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
         stage.draw();
