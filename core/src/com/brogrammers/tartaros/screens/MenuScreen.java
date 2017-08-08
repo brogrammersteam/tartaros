@@ -38,7 +38,7 @@ public class MenuScreen implements Screen {
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("skin/menu/menu.json"));
 
         backgroundTexture = game.assets.get("graphics/background_menu.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -46,7 +46,7 @@ public class MenuScreen implements Screen {
         singlePlayerButton = new TextButton("Singleplayer", skin);
         multiPlayerButton = new TextButton("Multiplayer", skin);
         settingsButton = new TextButton("Settings", skin);
-        reportButton = new TextButton("Report to our Github Repository", skin);
+        reportButton = new TextButton("Report to Github", skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(singlePlayerButton);
