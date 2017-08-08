@@ -98,11 +98,12 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
-		font: default-font
+		font: Fiolex_Mephisto
 		fontColor: white
-		background: default-select
+		background: button22
 		scrollStyle: default
 		listStyle: default
+		backgroundOpen: button_pushed
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
