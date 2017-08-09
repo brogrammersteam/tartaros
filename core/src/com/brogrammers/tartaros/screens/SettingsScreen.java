@@ -40,6 +40,7 @@ public class SettingsScreen implements Screen {
     private TextButton impressumButton;
     private TextButton resetAcceptButton;
     private TextButton resetRejectButton;
+    private TextButton forceUpdateButton;
     private TextButton backButton;
 
     private Label titleLabel;
@@ -97,6 +98,7 @@ public class SettingsScreen implements Screen {
         impressumButton = new TextButton("Created by", skin);
         resetAcceptButton = new TextButton("Ok", skin);
         resetRejectButton = new TextButton("Abbrechen", skin);
+        forceUpdateButton = new TextButton("Force Update", skin);
         backButton = new TextButton("Back", skin);
 
 
@@ -118,6 +120,7 @@ public class SettingsScreen implements Screen {
         resetButton.getLabel().setAlignment(Align.center);
         impressumButton.getLabel().setAlignment(Align.center);
         backButton.getLabel().setAlignment(Align.center);
+        forceUpdateButton.getLabel().setAlignment(Align.center);
 
         impressumButton.addListener(new ClickListener() {
             @Override
@@ -155,6 +158,13 @@ public class SettingsScreen implements Screen {
             }
         });
 
+        forceUpdateButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                forceUpdateButton.setText("No function");
+            }
+        });
+
         backButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -170,7 +180,8 @@ public class SettingsScreen implements Screen {
         table.row();
         table.add(titleLabel).expandX().padBottom(400).width(Tartaros.V_WIDTH - 100).center().colspan(2);
         table.row();
-        table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300).colspan(2);
+        table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
+        table.add(forceUpdateButton).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
         table.row();
         table.add(resetButton).expandX().padBottom(75).height(100).width(300).align(Align.right).padRight(10);
         table.add(impressumButton).expandX().padBottom(75).height(100).width(300).align(Align.left).padLeft(10);
