@@ -43,6 +43,7 @@ public class MenuScreen implements Screen {
     private TextButton multiPlayerButton;
     private TextButton settingsButton;
     private TextButton reportButton;
+    private TextButton quitButton;
 
     public MenuScreen(Tartaros game) {
         this.game = game;
@@ -74,6 +75,7 @@ public class MenuScreen implements Screen {
         multiPlayerButton = new TextButton("Multiplayer", skin);
         settingsButton = new TextButton("Settings", skin);
         reportButton = new TextButton("Report to Github", skin);
+        quitButton = new TextButton("Exit", skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(table);
@@ -90,12 +92,13 @@ public class MenuScreen implements Screen {
         multiPlayerButton.getLabel().setAlignment(Align.center);
         settingsButton.getLabel().setAlignment(Align.center);
         reportButton.getLabel().setAlignment(Align.center);
+        quitButton.getLabel().setAlignment(Align.center);
 
         table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         table.bottom();
 
         table.row();
-        table.add(titleLabel).expandX().width(Tartaros.V_WIDTH - 100).height(300).center().padBottom(175);
+        table.add(titleLabel).expandX().width(Tartaros.V_WIDTH - 100).height(300).center().padBottom(150);
         table.row();
         table.add(singlePlayerButton).expandX().width(500).height(100).center().padBottom(50);
         table.row();
@@ -103,7 +106,9 @@ public class MenuScreen implements Screen {
         table.row();
         table.add(settingsButton).expandX().width(500).height(100).center().padBottom(50);
         table.row();
-        table.add(reportButton).expandX().width(500).height(100).center().padBottom(90);
+        table.add(reportButton).expandX().width(500).height(100).center().padBottom(50);
+        table.row();
+        table.add(quitButton).expandX().width(500).height(100).center().padBottom(30);
 
         singlePlayerButton.addListener(new ClickListener() {
             @Override
@@ -133,6 +138,13 @@ public class MenuScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 Gdx.net.openURI("https://github.com/brogrammersteam/tartaros/issues");
+            }
+        });
+
+        quitButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                Gdx.app.exit();
             }
         });
     }

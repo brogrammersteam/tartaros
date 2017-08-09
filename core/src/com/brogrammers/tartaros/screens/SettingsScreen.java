@@ -189,17 +189,17 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void pause() {
-
+        System.out.println("Settings Pause");
     }
 
     @Override
     public void resume() {
-
+        System.out.println("Settings Resume");
     }
 
     @Override
     public void hide() {
-
+        System.out.println("Settings Hide");
     }
 
     @Override

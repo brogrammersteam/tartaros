@@ -36,6 +36,8 @@ public class Tartaros extends Game {
 		batch = new SpriteBatch();
 		mainSettings = Gdx.app.getPreferences("Settings");
 
+		initializeSettings();
+
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
 	}
@@ -52,5 +54,10 @@ public class Tartaros extends Game {
         this.getScreen().dispose();
         assets.dispose();
 		super.dispose();
+	}
+
+	public void initializeSettings(){
+
+    	mainSettings.flush();
 	}
 }
