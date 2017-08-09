@@ -168,13 +168,12 @@ public class SettingsScreen implements Screen {
 
         table.bottom();
         table.row();
-        table.add(titleLabel).expandX().padBottom(400).width(Tartaros.V_WIDTH - 100).center();
+        table.add(titleLabel).expandX().padBottom(400).width(Tartaros.V_WIDTH - 100).center().colspan(2);
         table.row();
-        table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300);
+        table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300).colspan(2);
         table.row();
-        table.add(resetButton).expandX().padBottom(50).height(100).width(300);
-        table.row();
-        table.add(impressumButton).expandX().padBottom(75).height(100).width(300);
+        table.add(resetButton).expandX().padBottom(75).height(100).width(300).align(Align.right).padRight(10);
+        table.add(impressumButton).expandX().padBottom(75).height(100).width(300).align(Align.left).padLeft(10);
     }
 
     @Override

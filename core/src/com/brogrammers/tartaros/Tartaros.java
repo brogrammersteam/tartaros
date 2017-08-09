@@ -20,6 +20,7 @@ public class Tartaros extends Game {
     public static final boolean DEBUG = false;
     public static final boolean DEVELOP = true;
     public static final boolean FULLSCREEN = true;
+    public static final boolean VSYNC = true;
 
 	public static final float VERSION = 0.2f;
 	public static final float alphaStart = 0f;

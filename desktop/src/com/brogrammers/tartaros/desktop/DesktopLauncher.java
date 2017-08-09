@@ -14,6 +14,7 @@ public class DesktopLauncher {
 		config.backgroundFPS = Tartaros.FPS;
 		config.fullscreen = Tartaros.FULLSCREEN;
 		config.resizable = Tartaros.RESIZABLE;
+		config.vSyncEnabled = Tartaros.VSYNC;
 //		config.addIcon();
 //		TODO Create Icon @Designer-Team
 		new LwjglApplication(new Tartaros(), config);
