@@ -110,8 +110,10 @@ public class PreReleaseScreen implements Screen {
 
     public void handleInput(){
 //        Chancel the App
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            app.exit();
+        if(Tartaros.DEVELOP) {
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                app.exit();
+            }
         }
 //        Get to the next Screen
         if(Gdx.input.justTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)){

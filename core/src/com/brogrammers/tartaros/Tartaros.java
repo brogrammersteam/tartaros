@@ -16,6 +16,7 @@ public class Tartaros extends Game {
 	public static final int V_WIDTH = 1920;
 
     public static final boolean DEBUG = false;
+    public static final boolean DEVELOP = true;
 
 	public static final float VERSION = 0.2f;
 	public static final float alphaStart = 0f;

@@ -104,8 +104,10 @@ public class LoadingScreen implements Screen {
     }
 
     public void handleInput(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            app.exit();
+        if(Tartaros.DEVELOP) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                app.exit();
+            }
         }
     }
 

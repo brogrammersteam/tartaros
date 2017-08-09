@@ -186,8 +186,10 @@ public class ImpressumScreen implements Screen {
     }
 
     private void handleInput(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            app.exit();
+        if(Tartaros.DEVELOP) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                app.exit();
+            }
         }
     }
 
