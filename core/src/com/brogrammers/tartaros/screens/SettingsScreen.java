@@ -122,55 +122,11 @@ public class SettingsScreen implements Screen {
         backButton.getLabel().setAlignment(Align.center);
         forceUpdateButton.getLabel().setAlignment(Align.center);
 
-        impressumButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-            game.setScreen(new ImpressumScreen(game));
-//                TODO Let the Game start the SinglePlayer Mode
-            }
-        });
-
         resetDialog.text(resetLabel);
         resetDialog.setResizable(false);
         resetDialog.setMovable(false);
         resetDialog.button(resetAcceptButton);
         resetDialog.button(resetRejectButton);
-
-        resetButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                resetDialog.show(stage);
-            }
-        });
-
-        resetAcceptButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
-//                TODO Reset the whole Config
-            }
-        });
-
-        resetRejectButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new SettingsScreen(game));
-            }
-        });
-
-        forceUpdateButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                forceUpdateButton.setText("No function");
-            }
-        });
-
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
-            }
-        });
 
         titleLabel.setAlignment(Align.center);
 
@@ -196,6 +152,7 @@ public class SettingsScreen implements Screen {
 
     private void update(float delta){
         handleInput();
+        setClickListener();
 
         stage.act(delta);
     }
@@ -206,6 +163,45 @@ public class SettingsScreen implements Screen {
                 app.exit();
             }
         }
+    }
+
+    private void setClickListener(){
+        impressumButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new ImpressumScreen(game));
+//                TODO Let the Game start the SinglePlayer Mode
+            }
+        });
+
+        resetButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                resetDialog.show(stage);
+            }
+        });
+
+        resetAcceptButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new MenuScreen(game));
+//                TODO Reset the whole Config
+            }
+        });
+
+        forceUpdateButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                forceUpdateButton.setText("No function");
+            }
+        });
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new MenuScreen(game));
+            }
+        });
     }
 
     @Override
