@@ -10,11 +10,10 @@ public class DesktopLauncher {
 		config.title = Tartaros.TITLE;
 		config.width = Tartaros.V_WIDTH;
 		config.height = Tartaros.V_HEIGHT;
-		config.foregroundFPS = 60;
-		config.backgroundFPS = 60;
-		config.fullscreen = true;
-//		TODO Make Fullscreen Possible in all Resolutions
-		config.resizable = false;
+		config.foregroundFPS = Tartaros.FPS;
+		config.backgroundFPS = Tartaros.FPS;
+		config.fullscreen = Tartaros.FULLSCREEN;
+		config.resizable = Tartaros.RESIZABLE;
 //		config.addIcon();
 //		TODO Create Icon @Designer-Team
 		new LwjglApplication(new Tartaros(), config);
