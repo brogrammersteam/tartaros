@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
@@ -24,6 +24,8 @@ public class ImpressumScreen implements Screen {
 
     private Stage stage;
     private Table table;
+
+    private Skin skin;
 
     private String impressumText = "Dies ist ein Projekt, welches uns sehr am Herzen liegt. Es entsteht, dank der Code+Design Initiative! Wir möchten ein Spiel entwickeln, welches so ergreifend ist, dass man es nicht mehr loslassen möchte. Man soll darin so gefangen sein wie im Tartaros, der mystischen Unterwelt der Götterwelt des antiken Griechenlands. Die Kernfrage ist: Beobachtet dich Tartaros oder beobachtest du Ihn?";
     private String thanksText = "Ein riesen Dankeschön geht hierbei an die Code+Design Initiative.";
@@ -60,6 +62,8 @@ public class ImpressumScreen implements Screen {
     private BitmapFont textLabelFont;
     private BitmapFont thanksLabelFont;
 
+    private TextButton backButton;
+
     public ImpressumScreen(final Tartaros game){
         this.game = game;
 
@@ -68,6 +72,8 @@ public class ImpressumScreen implements Screen {
         table = new Table();
         table.setFillParent(true);
         table.setDebug(Tartaros.DEBUG);
+
+        skin = game.assets.get("skin/menu/menu.json", Skin.class);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -114,7 +120,10 @@ public class ImpressumScreen implements Screen {
         textLabel = new Label(impressumText, textLabelStyle);
         thanksLabel = new Label(thanksText, thanksLabelStyle);
 
+        backButton = new TextButton("Back", skin);
+
         stage.addActor(backgroundImage);
+        stage.addActor(backButton);
         stage.addActor(table);
     }
 
@@ -125,6 +134,10 @@ public class ImpressumScreen implements Screen {
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
 
+        backButton.setPosition(25,25);
+        backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
+        backButton.getLabel().setAlignment(Align.center);
+
         textLabel.setWrap(true);
         textLabel.setAlignment(Align.center);
         textLabel.setWidth(Tartaros.V_WIDTH - 100);
@@ -132,6 +145,13 @@ public class ImpressumScreen implements Screen {
         thanksLabel.setWrap(true);
         thanksLabel.setAlignment(Align.center);
         thanksLabel.setWidth(Tartaros.V_WIDTH - 100);
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new SettingsScreen(game));
+            }
+        });
 
         table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 

@@ -40,6 +40,7 @@ public class SettingsScreen implements Screen {
     private TextButton impressumButton;
     private TextButton resetAcceptButton;
     private TextButton resetRejectButton;
+    private TextButton backButton;
 
     private Label titleLabel;
     private Label resetLabel;
@@ -96,9 +97,11 @@ public class SettingsScreen implements Screen {
         impressumButton = new TextButton("Created by", skin);
         resetAcceptButton = new TextButton("Ok", skin);
         resetRejectButton = new TextButton("Abbrechen", skin);
+        backButton = new TextButton("Back", skin);
 
 
         stage.addActor(backgroundImage);
+        stage.addActor(backButton);
         stage.addActor(table);
     }
 
@@ -109,8 +112,12 @@ public class SettingsScreen implements Screen {
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
 
+        backButton.setPosition(25,25);
+        backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
+
         resetButton.getLabel().setAlignment(Align.center);
         impressumButton.getLabel().setAlignment(Align.center);
+        backButton.getLabel().setAlignment(Align.center);
 
         impressumButton.addListener(new ClickListener() {
             @Override
@@ -145,6 +152,13 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 game.setScreen(new SettingsScreen(game));
+            }
+        });
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new MenuScreen(game));
             }
         });
 
