@@ -116,7 +116,7 @@ public class PreReleaseScreen implements Screen {
             }
         }
 //        Get to the next Screen
-        if(Gdx.input.justTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+        if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
             game.setScreen(new SplashScreen(game));
         }
     }
