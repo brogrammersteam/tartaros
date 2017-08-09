@@ -170,7 +170,6 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 game.setScreen(new ImpressumScreen(game));
-//                TODO Let the Game start the SinglePlayer Mode
             }
         });
 
