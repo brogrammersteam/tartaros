@@ -137,6 +137,14 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 game.setScreen(new MenuScreen(game));
+//                TODO Reset the whole Config
+            }
+        });
+
+        resetRejectButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new SettingsScreen(game));
             }
         });
 
