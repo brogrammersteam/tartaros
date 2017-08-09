@@ -196,8 +196,11 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void dispose() {
-//        Disposing all the Stuff
         System.out.println("Dispose");
         stage.dispose();
+        skin.dispose();
+        backgroundTexture.dispose();
+        titleLabelFont.dispose();
+        resetLabelFont.dispose();
     }
 }

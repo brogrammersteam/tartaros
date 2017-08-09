@@ -193,6 +193,13 @@ public class ImpressumScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        backgroundTexture.dispose();
+        generator.dispose();
+        thanksLabelFont.dispose();
+        textLabelFont.dispose();
+        jobLabelFont.dispose();
+        developerLabelFont.dispose();
+        headerLabelFont.dispose();
     }
 }

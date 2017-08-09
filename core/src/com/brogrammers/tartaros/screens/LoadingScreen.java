@@ -133,6 +133,9 @@ public class LoadingScreen implements Screen {
     public void dispose() {
         System.out.println("Dispose");
         stage.dispose();
+        backgroundTexture.dispose();
+        generator.dispose();
+        loadingLabelFont.dispose();
     }
 
     private void queueAssests(){
