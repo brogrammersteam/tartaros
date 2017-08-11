@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -27,14 +28,20 @@ public class MenuScreen implements Screen {
 
     private Skin skin;
 
+    private Container container;
+
     private Label titleLabel;
+    private Label splashLabel;
 
     private Label.LabelStyle titleLabelStyle;
+    private Label.LabelStyle splashLabelStyle;
 
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter titleLabelParameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter splashLabelParameter;
 
     private BitmapFont titleLabelFont;
+    private BitmapFont splashLabelFont;
 
     private Texture backgroundTexture;
     private Image backgroundImage;
@@ -45,8 +52,11 @@ public class MenuScreen implements Screen {
     private TextButton reportButton;
     private TextButton quitButton;
 
+    private int randomSplashNumber;
+
     public MenuScreen(Tartaros game) {
         this.game = game;
+        randomSplashNumber = 0;
 
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
@@ -64,12 +74,20 @@ public class MenuScreen implements Screen {
         titleLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         titleLabelParameter.size = 200;
 
+        splashLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        splashLabelParameter.size = 40;
+
         titleLabelFont = generator.generateFont(titleLabelParameter);
+        splashLabelFont = generator.generateFont(splashLabelParameter);
 
         titleLabelStyle = new Label.LabelStyle(titleLabelFont, new Color(1,1,1,1));
+        splashLabelStyle = new Label.LabelStyle(splashLabelFont, new Color(1,1,1,1));
 
         titleLabel = new Label("Tartaros", titleLabelStyle);
         titleLabel.setAlignment(Align.center);
+
+        splashLabel = new Label("", splashLabelStyle);
+        splashLabel.setAlignment(Align.center);
 
         singlePlayerButton = new TextButton("Singleplayer", skin);
         multiPlayerButton = new TextButton("Multiplayer", skin);
@@ -77,7 +95,10 @@ public class MenuScreen implements Screen {
         reportButton = new TextButton("Report to Github", skin);
         quitButton = new TextButton("Exit", skin);
 
+        container = new Container(splashLabel);
+
         stage.addActor(backgroundImage);
+        stage.addActor(container);
         stage.addActor(table);
     }
 
@@ -87,6 +108,14 @@ public class MenuScreen implements Screen {
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
+
+        splashLabel.setText(Tartaros.splashArray.random());
+
+        container.setPosition(250, Tartaros.V_HEIGHT - 490 );
+        container.setDebug(true);
+        container.setTransform(true);
+        container.setRotation(22);
+        container.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
         singlePlayerButton.getLabel().setAlignment(Align.center);
         multiPlayerButton.getLabel().setAlignment(Align.center);
@@ -197,5 +226,6 @@ public class MenuScreen implements Screen {
         generator.dispose();
         backgroundTexture.dispose();
         titleLabelFont.dispose();
+        splashLabelFont.dispose();
     }
 }

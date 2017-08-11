@@ -6,7 +6,9 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
+import com.sun.xml.internal.fastinfoset.util.StringArray;
 
 public class Tartaros extends Game {
 
@@ -26,6 +28,8 @@ public class Tartaros extends Game {
 	public static final float alphaStart = 0f;
 	public static final float fadeTime = 1.75f;
 
+	public static final Array<String> splashArray = new Array<String>();
+
 	public OrthographicCamera camera;
 
     public SpriteBatch batch;
@@ -42,6 +46,7 @@ public class Tartaros extends Game {
 		mainSettings = Gdx.app.getPreferences("Settings");
 
 		initializeSettings();
+		addSplashs();
 
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
@@ -64,5 +69,11 @@ public class Tartaros extends Game {
 	public void initializeSettings(){
 
     	mainSettings.flush();
+	}
+
+	private void addSplashs(){
+		splashArray.add("Here i am");
+		splashArray.add("Gotya");
+		splashArray.add("Whats up");
 	}
 }

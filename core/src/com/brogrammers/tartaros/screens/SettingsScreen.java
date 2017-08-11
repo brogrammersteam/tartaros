@@ -141,6 +141,13 @@ public class SettingsScreen implements Screen {
         table.row();
         table.add(resetButton).expandX().padBottom(75).height(100).width(300).align(Align.right).padRight(10);
         table.add(impressumButton).expandX().padBottom(75).height(100).width(300).align(Align.left).padLeft(10);
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                game.setScreen(new MenuScreen(game));
+            }
+        });
     }
 
     @Override
@@ -192,13 +199,6 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 forceUpdateButton.setText("No function");
-            }
-        });
-
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
             }
         });
     }
