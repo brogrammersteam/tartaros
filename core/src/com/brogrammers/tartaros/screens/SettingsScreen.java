@@ -15,8 +15,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
-import javax.management.openmbean.TabularType;
-
 import static com.badlogic.gdx.Gdx.app;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
