@@ -72,8 +72,8 @@ public class Tartaros extends Game {
 	}
 
 	private void addSplashs(){
-		splashArray.add("Here i am");
-		splashArray.add("Gotya");
-		splashArray.add("Whats up");
+		splashArray.add("No no  go there its a trick");
+		splashArray.add("I can see you");
+		splashArray.add("Be one with the game");
 	}
 }
