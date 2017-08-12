@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
+import javax.management.openmbean.TabularType;
+
 import static com.badlogic.gdx.Gdx.app;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -146,6 +148,7 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 game.setScreen(new MenuScreen(game));
+                Tartaros.mainSettings.flush();
             }
         });
 
@@ -156,6 +159,8 @@ public class SettingsScreen implements Screen {
                 Tartaros.initializeSettings();
             }
         });
+
+        languageSelectBox.setSelected(Tartaros.mainSettings.getString("language"));
     }
 
     @Override
@@ -163,6 +168,8 @@ public class SettingsScreen implements Screen {
         update(delta);
 
         stage.draw();
+
+        Tartaros.mainSettings.putString("language", languages[languageSelectBox.getSelectedIndex()]);
     }
 
     private void update(float delta){
