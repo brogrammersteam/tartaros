@@ -158,7 +158,7 @@ public class MenuScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 singlePlayerButton.setText("Game Started");
-//                TODO Let the Game start the SinglePlayer Mode
+                game.setScreen(new SingleplayerMenuScreen(game));
             }
         });
 
