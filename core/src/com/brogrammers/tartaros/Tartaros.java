@@ -74,7 +74,7 @@ public class Tartaros extends Game {
 		System.out.println("Initialise");
 
 		mainSettings.putBoolean("initialised", true);
-		mainSettings.putString("language", "en");
+		mainSettings.putString("language", "English");
 
     	mainSettings.flush();
 	}
