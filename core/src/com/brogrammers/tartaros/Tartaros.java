@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 
 public class Tartaros extends Game {
 
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
+	public static final String VERSION = "Prerelease 0.2";
 
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
@@ -24,7 +24,6 @@ public class Tartaros extends Game {
     public static final boolean FULLSCREEN = true;
     public static final boolean VSYNC = true;
 
-	public static final float VERSION = 0.2f;
 	public static final float alphaStart = 0f;
 	public static final float fadeTime = 1.75f;
 

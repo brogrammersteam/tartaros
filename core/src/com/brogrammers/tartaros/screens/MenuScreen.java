@@ -31,16 +31,20 @@ public class MenuScreen implements Screen {
     private Container container;
 
     private Label titleLabel;
+    private Label versionLabel;
     private Label splashLabel;
 
     private Label.LabelStyle titleLabelStyle;
+    private Label.LabelStyle versionLabelStyle;
     private Label.LabelStyle splashLabelStyle;
 
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter titleLabelParameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter versionLabelParameter;
     private FreeTypeFontGenerator.FreeTypeFontParameter splashLabelParameter;
 
     private BitmapFont titleLabelFont;
+    private BitmapFont versionLabelFont;
     private BitmapFont splashLabelFont;
 
     private Texture backgroundTexture;
@@ -77,14 +81,22 @@ public class MenuScreen implements Screen {
         splashLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         splashLabelParameter.size = 40;
 
+        versionLabelParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        versionLabelParameter.size = 30;
+
         titleLabelFont = generator.generateFont(titleLabelParameter);
+        versionLabelFont = generator.generateFont(versionLabelParameter);
         splashLabelFont = generator.generateFont(splashLabelParameter);
 
         titleLabelStyle = new Label.LabelStyle(titleLabelFont, new Color(1,1,1,1));
+        versionLabelStyle = new Label.LabelStyle(versionLabelFont, new Color(1,1,1,1));
         splashLabelStyle = new Label.LabelStyle(splashLabelFont, new Color(1,1,1,1));
 
         titleLabel = new Label("Tartaros", titleLabelStyle);
         titleLabel.setAlignment(Align.center);
+
+        versionLabel = new Label("Version: " + Tartaros.VERSION, versionLabelStyle);
+        versionLabel.setAlignment(Align.center);
 
         splashLabel = new Label("", splashLabelStyle);
         splashLabel.setAlignment(Align.center);
@@ -98,6 +110,7 @@ public class MenuScreen implements Screen {
         container = new Container(splashLabel);
 
         stage.addActor(backgroundImage);
+        stage.addActor(versionLabel);
         stage.addActor(container);
         stage.addActor(table);
     }
@@ -108,6 +121,9 @@ public class MenuScreen implements Screen {
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
+
+        versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, 800);
+        versionLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
         splashLabel.setText(Tartaros.splashArray.random());
 
