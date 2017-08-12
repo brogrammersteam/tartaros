@@ -33,7 +33,7 @@ public class Tartaros extends Game {
 
     public SpriteBatch batch;
     public AssetManager assets;
-    public Preferences mainSettings;
+    public static Preferences mainSettings;
 
     @Override
 	public void create () {
@@ -44,7 +44,12 @@ public class Tartaros extends Game {
 		batch = new SpriteBatch();
 		mainSettings = Gdx.app.getPreferences("Settings");
 
-		initializeSettings();
+		if(mainSettings.getBoolean("initialised")){
+
+		}else {
+			initializeSettings();
+		}
+
 		addSplashs();
 
 //		  Setting the first Screen
@@ -65,7 +70,11 @@ public class Tartaros extends Game {
 		super.dispose();
 	}
 
-	public void initializeSettings(){
+	public static void initializeSettings(){
+		System.out.println("Initialise");
+
+		mainSettings.putBoolean("initialised", true);
+		mainSettings.putString("language", "en");
 
     	mainSettings.flush();
 	}
