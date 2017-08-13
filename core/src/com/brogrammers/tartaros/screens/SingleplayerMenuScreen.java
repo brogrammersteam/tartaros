@@ -78,6 +78,7 @@ public class SingleplayerMenuScreen implements Screen {
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);
+        stage.addActor(titleLabel);
         stage.addActor(table);
     }
 
@@ -90,7 +91,13 @@ public class SingleplayerMenuScreen implements Screen {
 
         backButton.setPosition(25,25);
         backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
+        backButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
+        titleLabel.setPosition((Tartaros.V_WIDTH - titleLabel.getWidth()) / 2, Tartaros.V_HEIGHT - titleLabel.getHeight() + 125);
+        titleLabel.setSize(titleLabel.getWidth(), titleLabel.getHeight());
+        titleLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+
+        titleLabel.setAlignment(Align.center);
         backButton.getLabel().setAlignment(Align.center);
         savegame1.getLabel().setAlignment(Align.center);
         savegame2.getLabel().setAlignment(Align.center);
@@ -99,9 +106,7 @@ public class SingleplayerMenuScreen implements Screen {
         table.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
         table.top();
 
-        table.row();
-        table.add(titleLabel).expandX().width(Tartaros.V_WIDTH - 100).height(200).center().align(Align.center).colspan(3);
-        table.row().padTop(70);
+        table.row().padTop(300);
         table.add(savegame1).expandX();
         table.add(savegame2).expandX();
         table.add(savegame3).expandX();
