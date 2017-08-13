@@ -42,10 +42,10 @@ public class Tartaros extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
-		mainSettings = Gdx.app.getPreferences("Settings");
+		mainSettings = Gdx.app.getPreferences("com.brogrammers.tartaros.mainSettings");
 
 		if(mainSettings.getBoolean("initialised")){
-
+			System.out.println("Die Einstellungen wurden bereits initialisiert");
 		}else {
 			initializeSettings();
 		}
@@ -80,8 +80,11 @@ public class Tartaros extends Game {
 	}
 
 	private void addSplashs(){
-		splashArray.add("No no  go there its a trick");
+		splashArray.add("No no go there its a trick");
 		splashArray.add("I can see you");
 		splashArray.add("Be one with the game");
+		splashArray.add("Can you help me");
+		splashArray.add("Who are you");
+		splashArray.add("Go away nothing is here");
 	}
 }
