@@ -25,6 +25,26 @@ public class MenuScreen implements Screen {
     private Stage stage;
     private Table table;
 
+    private static final String singlePlayerText_de = "Einzelspieler";
+    private static final String singlePlayerText_en = "Singleplayer";
+    private static final String singlePlayerText_bay = "Alloa";
+
+    private String multiPlayerText_de = "Mehrspieler";
+    private String multiPlayerText_en = "Multiplayer";
+    private String multiPlayerText_bay = "Mitanand";
+
+    private String settingsText_de = "Einstellungen";
+    private String settingsText_en = "Settings";
+    private String settingsText_bay = "Einstellungen";
+
+    private String reportText_de = "Probleme melden";
+    private String reportText_en = "Report to Github";
+    private String reportText_bay = "Was meckern";
+
+    private String exitText_de = "Beenden";
+    private String exitText_en = "Exit";
+    private String exitText_bay = "Raus da";
+
     private Skin skin;
 
     private Container container;
@@ -55,11 +75,8 @@ public class MenuScreen implements Screen {
     private TextButton reportButton;
     private TextButton quitButton;
 
-    private int randomSplashNumber;
-
     public MenuScreen(Tartaros game) {
         this.game = game;
-        randomSplashNumber = 0;
 
         stage = new Stage(new FitViewport(Tartaros.V_WIDTH, Tartaros.V_HEIGHT, game.camera));
         Gdx.input.setInputProcessor(stage);
@@ -100,11 +117,11 @@ public class MenuScreen implements Screen {
         splashLabel = new Label("", splashLabelStyle);
         splashLabel.setAlignment(Align.center);
 
-        singlePlayerButton = new TextButton("Singleplayer", skin);
-        multiPlayerButton = new TextButton("Multiplayer", skin);
-        settingsButton = new TextButton("Settings", skin);
-        reportButton = new TextButton("Report to Github", skin);
-        quitButton = new TextButton("Exit", skin);
+        singlePlayerButton = new TextButton("", skin);
+        multiPlayerButton = new TextButton("", skin);
+        settingsButton = new TextButton("", skin);
+        reportButton = new TextButton("", skin);
+        quitButton = new TextButton("", skin);
 
         container = new Container(splashLabel);
 
@@ -117,6 +134,8 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
         System.out.println("MENU");
+
+        setLanguage();
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
@@ -157,7 +176,6 @@ public class MenuScreen implements Screen {
         singlePlayerButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
-                singlePlayerButton.setText("Game Started");
                 game.setScreen(new SingleplayerMenuScreen(game));
             }
         });
@@ -197,21 +215,49 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        stage.act(delta);
         stage.draw();
     }
 
-    public void update(float delta){
+    private void update(float delta){
+        stage.act(delta);
         handleInput();
     }
 
-    public void handleInput(){
+    private void handleInput(){
         if(Tartaros.DEVELOP) {
             if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
                 app.exit();
             }
         }
 
+    }
+
+    private void setLanguage(){
+
+        System.out.println("Set Languages");
+
+        if(Tartaros.mainSettings.getString("language").equals("German")){
+            System.out.println("German");
+            singlePlayerButton.setText(singlePlayerText_de);
+            multiPlayerButton.setText(multiPlayerText_de);
+            settingsButton.setText(settingsText_de);
+            reportButton.setText(reportText_de);
+            quitButton.setText(exitText_de);
+        }else if (Tartaros.mainSettings.getString("language").equals("Bayrisch")){
+            System.out.println("Bayrisch");
+            singlePlayerButton.setText(singlePlayerText_bay);
+            multiPlayerButton.setText(multiPlayerText_bay);
+            settingsButton.setText(settingsText_bay);
+            reportButton.setText(reportText_bay);
+            quitButton.setText(exitText_bay);
+        }else if (Tartaros.mainSettings.getString("language").equals("English")){
+            System.out.println("English");
+            singlePlayerButton.setText(singlePlayerText_en);
+            multiPlayerButton.setText(multiPlayerText_en);
+            settingsButton.setText(settingsText_en);
+            reportButton.setText(reportText_en);
+            quitButton.setText(exitText_en);
+        }
     }
 
     @Override
