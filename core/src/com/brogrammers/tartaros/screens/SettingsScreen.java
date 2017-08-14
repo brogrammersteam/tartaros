@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -42,6 +43,8 @@ public class SettingsScreen implements Screen {
     private TextButton resetRejectButton;
     private TextButton forceUpdateButton;
     private TextButton backButton;
+
+    private CheckBox audioCheckBox;
 
     private Label titleLabel;
     private Label resetLabel;
@@ -101,6 +104,7 @@ public class SettingsScreen implements Screen {
         forceUpdateButton = new TextButton("Force Update", skin);
         backButton = new TextButton("Back", skin);
 
+        audioCheckBox = new CheckBox("Audio", skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);
@@ -110,6 +114,12 @@ public class SettingsScreen implements Screen {
     @Override
     public void show() {
         System.out.println("SETTINGS");
+
+        if (Settings.getAudio()){
+            audioCheckBox.setChecked(true);
+        }else {
+            audioCheckBox.setChecked(false);
+        }
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
@@ -135,6 +145,8 @@ public class SettingsScreen implements Screen {
         table.bottom();
         table.row();
         table.add(titleLabel).expandX().padBottom(400).width(Tartaros.V_WIDTH - 100).center().colspan(2);
+        table.row();
+        table.add(audioCheckBox).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
         table.row();
         table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
         table.add(forceUpdateButton).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
@@ -167,7 +179,14 @@ public class SettingsScreen implements Screen {
 
         stage.draw();
 
-        Tartaros.mainSettings.putString("language", languages[languageSelectBox.getSelectedIndex()]);
+        if(audioCheckBox.isChecked()){
+            Settings.setAudio(true);
+        }
+        else{
+            Settings.setAudio(false);
+        }
+
+        Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
     }
 
     private void update(float delta){

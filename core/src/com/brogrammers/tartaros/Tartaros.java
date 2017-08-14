@@ -4,10 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
+import com.brogrammers.tartaros.screens.Settings;
 
 public class Tartaros extends Game {
 
@@ -34,6 +36,7 @@ public class Tartaros extends Game {
     public SpriteBatch batch;
     public AssetManager assets;
     public static Preferences mainSettings;
+    public static Music music;
 
     @Override
 	public void create () {
@@ -42,6 +45,7 @@ public class Tartaros extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
+
 		mainSettings = Gdx.app.getPreferences("com.brogrammers.tartaros.mainSettings");
 
 		if(mainSettings.getBoolean("initialised")){
@@ -51,6 +55,12 @@ public class Tartaros extends Game {
 		}
 
 		addSplashs();
+
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+		music.setLooping(true);
+		if(Settings.getAudio()) {
+			music.play();
+		}
 
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
@@ -74,7 +84,19 @@ public class Tartaros extends Game {
 		System.out.println("Initialise");
 
 		mainSettings.putBoolean("initialised", true);
-		mainSettings.putString("language", "English");
+
+		Settings.setLanguage("English");
+
+		Settings.setAudio(true);
+
+		mainSettings.putBoolean("savegame1initialised", false);
+		mainSettings.putString("savegame1name", "Savegame 1");
+
+		mainSettings.putBoolean("savegame2initialised", false);
+		mainSettings.putString("savegame2name", "Savegame 2");
+
+		mainSettings.putBoolean("savegame3initialised", false);
+		mainSettings.putString("savegame3name", "Savegame 3");
 
     	mainSettings.flush();
 	}

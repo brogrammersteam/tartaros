@@ -72,9 +72,9 @@ public class SingleplayerMenuScreen implements Screen {
         titleLabel = new Label("Singleplayer", titleLabelStyle);
         titleLabel.setAlignment(Align.center);
 
-        savegame1 = new TextButton("Savegame 1", skin);
-        savegame2 = new TextButton("Savegame 2", skin);
-        savegame3 = new TextButton("Savegame 3", skin);
+        savegame1 = new TextButton(Tartaros.mainSettings.getString("savegame1name"), skin);
+        savegame2 = new TextButton(Tartaros.mainSettings.getString("savegame2name"), skin);
+        savegame3 = new TextButton(Tartaros.mainSettings.getString("savegame3name"), skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);
