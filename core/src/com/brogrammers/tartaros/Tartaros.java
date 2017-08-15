@@ -16,6 +16,9 @@ public class Tartaros extends Game {
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
 	public static final String VERSION = "Prerelease 0.2";
 
+	public static final String MUSICKEY = "music";
+	public static final String SOUNDKEY = "sound";
+
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
 	public static final int FPS = 60;
@@ -58,7 +61,7 @@ public class Tartaros extends Game {
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 		music.setLooping(true);
-		if(Settings.getAudio()) {
+		if(Settings.getMusic()) {
 			music.play();
 		}
 
@@ -77,6 +80,7 @@ public class Tartaros extends Game {
         batch.dispose();
         this.getScreen().dispose();
         assets.dispose();
+        music.dispose();
 		super.dispose();
 	}
 
@@ -87,7 +91,8 @@ public class Tartaros extends Game {
 
 		Settings.setLanguage("English");
 
-		Settings.setAudio(true);
+		Settings.setMusic(true);
+		Settings.setSound(true);
 
 		mainSettings.putBoolean("savegame1initialised", false);
 		mainSettings.putString("savegame1name", "Savegame 1");

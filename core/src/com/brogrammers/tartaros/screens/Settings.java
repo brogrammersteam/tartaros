@@ -4,13 +4,23 @@ import com.brogrammers.tartaros.Tartaros;
 
 public class Settings {
 
-    public static void setAudio(boolean status){
+    public static void setMusic(boolean status){
         if(status){
-            Tartaros.mainSettings.putBoolean("audio", true);
+            Tartaros.mainSettings.putBoolean(Tartaros.MUSICKEY, true);
             Tartaros.music.play();
         }else{
-            Tartaros.mainSettings.putBoolean("audio", false);
+            Tartaros.mainSettings.putBoolean(Tartaros.MUSICKEY, false);
             Tartaros.music.stop();
+        }
+
+        Tartaros.mainSettings.flush();
+    }
+
+    public static void setSound(boolean status){
+        if(status){
+            Tartaros.mainSettings.putBoolean(Tartaros.SOUNDKEY, true);
+        }else{
+            Tartaros.mainSettings.putBoolean(Tartaros.SOUNDKEY, false);
         }
 
         Tartaros.mainSettings.flush();
@@ -32,7 +42,11 @@ public class Settings {
         return(Tartaros.mainSettings.getString("language"));
     }
 
-    public static boolean getAudio(){
-        return(Tartaros.mainSettings.getBoolean("audio"));
+    public static boolean getMusic(){
+        return(Tartaros.mainSettings.getBoolean(Tartaros.MUSICKEY));
+    }
+
+    public static boolean getSound(){
+        return(Tartaros.mainSettings.getBoolean(Tartaros.SOUNDKEY));
     }
 }
