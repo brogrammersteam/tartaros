@@ -20,6 +20,8 @@ public class Tartaros extends Game {
 	static final String SOUNDKEY = "sound";
 	static final String SOUNDVOLUMEKEY = "soundvolume";
 
+	static final String SAVEGAMENAMEKEY = "savegamename";
+
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
 	public static final int FPS = 60;
@@ -93,19 +95,20 @@ public class Tartaros extends Game {
 
 		Settings.setLanguage("English");
 
+		Settings.setSavegameName(1, "Savegame1");
+        Settings.setSavegameName(2, "Savegame2");
+        Settings.setSavegameName(3, "Savegame3");
+
 		Settings.setMusic(true);
 		Settings.setMusicVolume(1f);
 		Settings.setSound(true);
 		Settings.setSoundVolume(1f);
 
 		mainSettings.putBoolean("savegame1initialised", false);
-		mainSettings.putString("savegame1name", "Savegame 1");
 
 		mainSettings.putBoolean("savegame2initialised", false);
-		mainSettings.putString("savegame2name", "Savegame 2");
 
 		mainSettings.putBoolean("savegame3initialised", false);
-		mainSettings.putString("savegame3name", "Savegame 3");
 
     	mainSettings.flush();
 	}

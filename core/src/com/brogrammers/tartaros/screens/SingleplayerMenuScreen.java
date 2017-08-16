@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.brogrammers.tartaros.Settings;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -72,9 +73,9 @@ public class SingleplayerMenuScreen implements Screen {
         titleLabel = new Label("Singleplayer", titleLabelStyle);
         titleLabel.setAlignment(Align.center);
 
-        savegame1 = new TextButton(Tartaros.mainSettings.getString("savegame1name"), skin);
-        savegame2 = new TextButton(Tartaros.mainSettings.getString("savegame2name"), skin);
-        savegame3 = new TextButton(Tartaros.mainSettings.getString("savegame3name"), skin);
+        savegame1 = new TextButton(Settings.getSavegameName(1), skin);
+        savegame2 = new TextButton(Settings.getSavegameName(2), skin);
+        savegame3 = new TextButton(Settings.getSavegameName(3), skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);

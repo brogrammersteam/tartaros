@@ -51,6 +51,12 @@ public class Settings {
         Tartaros.mainSettings.flush();
     }
 
+    public static void setSavegameName(int savegame, String name){
+        Tartaros.mainSettings.putString(Tartaros.SAVEGAMENAMEKEY+savegame, name);
+
+        Tartaros.mainSettings.flush();
+    }
+
     public static String getLanguage(){
         return(Tartaros.mainSettings.getString("language"));
     }
@@ -69,5 +75,9 @@ public class Settings {
 
     public static float getSoundVolume(){
         return(Tartaros.mainSettings.getFloat(Tartaros.SOUNDVOLUMEKEY));
+    }
+
+    public static String getSavegameName(int savegame){
+        return(Tartaros.mainSettings.getString(Tartaros.SAVEGAMENAMEKEY+savegame));
     }
 }
