@@ -7,12 +7,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.brogrammers.tartaros.Settings;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -33,6 +36,7 @@ public class SettingsScreen implements Screen {
 
     private Dialog resetDialog;
     private Dialog audioDialog;
+    private Dialog languageDialog;
 
     private Texture backgroundTexture;
     private Image backgroundImage;
@@ -43,15 +47,22 @@ public class SettingsScreen implements Screen {
     private TextButton resetRejectButton;
     private TextButton forceUpdateButton;
     private TextButton backButton;
+
     private TextButton audioButton;
     private TextButton audioAcceptButton;
+    private TextButton languageButton;
+    private TextButton languageAcceptButton;
 
     private CheckBox musicCheckBox;
     private CheckBox soundCheckBox;
 
+    private Slider musicVolumeSlider;
+    private Slider soundVolumeSlider;
+
     private Label titleLabel;
     private Label resetLabel;
     private Label audioLabel;
+    private Label languageLabel;
 
     private Label.LabelStyle titleLabelStyle;
     private Label.LabelStyle dialogLabelStyle;
@@ -76,6 +87,7 @@ public class SettingsScreen implements Screen {
 
         resetDialog = new Dialog("Reset Game", skin);
         audioDialog = new Dialog("Audio", skin);
+        languageDialog = new Dialog("Language", skin);
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
 
@@ -95,6 +107,7 @@ public class SettingsScreen implements Screen {
 
         resetLabel = new Label("Bist du dir sicher das du das Spiel zurücksetzten willst ?", dialogLabelStyle);
         audioLabel = new Label("Ändere hier die Audioeinstellungen", dialogLabelStyle);
+        languageLabel = new Label("Ändere deine Sprache hier", dialogLabelStyle);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -112,9 +125,17 @@ public class SettingsScreen implements Screen {
         backButton = new TextButton("Back", skin);
         audioButton = new TextButton("Audio", skin);
         audioAcceptButton = new TextButton("Ok", skin);
+        languageButton = new TextButton("Language", skin);
+        languageAcceptButton = new TextButton("Ok", skin);
 
         musicCheckBox = new CheckBox("Music", skin);
         soundCheckBox = new CheckBox("Sounds", skin);
+
+        musicVolumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        musicVolumeSlider.setValue(Settings.getMusicVolume());
+
+        soundVolumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        soundVolumeSlider.setValue(Settings.getSoundVolume());
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);
@@ -148,20 +169,43 @@ public class SettingsScreen implements Screen {
         backButton.getLabel().setAlignment(Align.center);
         forceUpdateButton.getLabel().setAlignment(Align.center);
 
-        resetDialog.text(resetLabel);
         resetDialog.setResizable(false);
         resetDialog.setMovable(false);
+        resetDialog.setDebug(Tartaros.DEBUG);
+        resetDialog.text(resetLabel);
         resetDialog.button(resetAcceptButton);
         resetDialog.button(resetRejectButton);
 
         audioDialog.setResizable(false);
         audioDialog.setMovable(false);
         audioDialog.setDebug(Tartaros.DEBUG);
+
+        audioDialog.getContentTable().top();
         audioDialog.getContentTable().add(audioLabel);
-        audioDialog.getButtonTable().add(musicCheckBox).align(Align.right);
-        audioDialog.getButtonTable().add(soundCheckBox).align(Align.left);
+        audioDialog.getContentTable().pad(50);
+
+        audioDialog.getButtonTable().add(musicCheckBox).expandX().align(Align.center);
+        audioDialog.getButtonTable().add(soundCheckBox).expandX().align(Align.center);
+        audioDialog.getButtonTable().row();
+        audioDialog.getButtonTable().add(musicVolumeSlider).expandX().align(Align.center);
+        audioDialog.getButtonTable().add(soundVolumeSlider).expandX().align(Align.center);
         audioDialog.getButtonTable().row();
         audioDialog.getButtonTable().add(audioAcceptButton).colspan(2).align(Align.center);
+        audioDialog.getButtonTable().pad(50);
+
+        languageDialog.setPosition((Tartaros.V_WIDTH - languageDialog.getWidth()) / 2,(Tartaros.V_HEIGHT - languageDialog.getHeight()) / 2);
+        languageDialog.setResizable(false);
+        languageDialog.setMovable(false);
+        languageDialog.setDebug(Tartaros.DEBUG);
+
+        languageDialog.getContentTable().add(languageLabel);
+        languageDialog.getContentTable().row();
+        languageDialog.getContentTable().pad(50);
+
+        languageDialog.getButtonTable().add(languageSelectBox);
+        languageDialog.getButtonTable().row();
+        languageDialog.getButtonTable().add(languageAcceptButton);
+        languageDialog.getButtonTable().pad(50);
 
         titleLabel.setAlignment(Align.center);
 
@@ -173,7 +217,7 @@ public class SettingsScreen implements Screen {
         table.row();
         table.add(audioButton).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
         //table.add(audioCheckBox).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
-        table.add(languageSelectBox).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
+        table.add(languageButton).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
         table.row();
         table.add(forceUpdateButton).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
         table.add(resetButton).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
@@ -197,13 +241,7 @@ public class SettingsScreen implements Screen {
         });
 
 
-        audioAcceptButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                audioDialog.hide();
-                show();
-            }
-        });
+
         languageSelectBox.setSelected(Tartaros.mainSettings.getString("language"));
     }
 
@@ -231,7 +269,6 @@ public class SettingsScreen implements Screen {
 
     private void update(float delta){
         handleInput();
-        setClickListener();
 
         stage.act(delta);
     }
@@ -242,9 +279,26 @@ public class SettingsScreen implements Screen {
                 app.exit();
             }
         }
+
+        setClickListener();
     }
 
     private void setClickListener(){
+
+        audioAcceptButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button) {
+                audioDialog.hide();
+            }
+        });
+
+        languageAcceptButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                languageDialog.hide();
+            }
+        });
+
         impressumButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
@@ -270,6 +324,27 @@ public class SettingsScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button){
                 audioDialog.show(stage);
+            }
+        });
+
+        languageButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int point, int button){
+                languageDialog.show(stage);
+            }
+        });
+
+        musicVolumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Settings.setMusicVolume(musicVolumeSlider.getValue());
+            }
+        });
+
+        soundVolumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Settings.setSoundVolume(musicVolumeSlider.getValue());
             }
         });
     }

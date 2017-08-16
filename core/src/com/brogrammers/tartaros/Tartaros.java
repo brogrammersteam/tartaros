@@ -9,22 +9,23 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
-import com.brogrammers.tartaros.screens.Settings;
 
 public class Tartaros extends Game {
 
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
 	public static final String VERSION = "Prerelease 0.2";
 
-	public static final String MUSICKEY = "music";
-	public static final String SOUNDKEY = "sound";
+	static final String MUSICKEY = "music";
+	static final String MUSICVOLUMEKEY = "musicvolume";
+	static final String SOUNDKEY = "sound";
+	static final String SOUNDVOLUMEKEY = "soundvolume";
 
 	public static final int V_HEIGHT = 1080;
 	public static final int V_WIDTH = 1920;
 	public static final int FPS = 60;
 
 	public static final boolean RESIZABLE = false;
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean DEVELOP = true;
     public static final boolean FULLSCREEN = true;
     public static final boolean VSYNC = true;
@@ -51,6 +52,13 @@ public class Tartaros extends Game {
 
 		mainSettings = Gdx.app.getPreferences("com.brogrammers.tartaros.mainSettings");
 
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+		music.setLooping(true);
+		if(Settings.getMusic()) {
+			music.play();
+		}
+		music.setVolume(Settings.getMusicVolume());
+
 		if(mainSettings.getBoolean("initialised")){
 			System.out.println("Die Einstellungen wurden bereits initialisiert");
 		}else {
@@ -58,12 +66,6 @@ public class Tartaros extends Game {
 		}
 
 		addSplashs();
-
-		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
-		music.setLooping(true);
-		if(Settings.getMusic()) {
-			music.play();
-		}
 
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
@@ -92,7 +94,9 @@ public class Tartaros extends Game {
 		Settings.setLanguage("English");
 
 		Settings.setMusic(true);
+		Settings.setMusicVolume(1f);
 		Settings.setSound(true);
+		Settings.setSoundVolume(1f);
 
 		mainSettings.putBoolean("savegame1initialised", false);
 		mainSettings.putString("savegame1name", "Savegame 1");
