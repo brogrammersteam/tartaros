@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
@@ -173,42 +173,7 @@ public class MenuScreen implements Screen {
         table.row();
         table.add(quitButton).expandX().width(500).height(100).center().padBottom(30);
 
-        singlePlayerButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new SingleplayerMenuScreen(game));
-            }
-        });
-
-        multiPlayerButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                multiPlayerButton.setText("Game Started");
-//                TODO Let the Game start the MultiPlayer Mode
-            }
-        });
-
-        settingsButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new SettingsScreen(game));
-            }
-        });
-
-
-        reportButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                Gdx.net.openURI("https://github.com/brogrammersteam/tartaros/issues");
-            }
-        });
-
-        quitButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                Gdx.app.exit();
-            }
-        });
+        setChangeListener();
     }
 
     @Override
@@ -288,5 +253,40 @@ public class MenuScreen implements Screen {
         backgroundTexture.dispose();
         titleLabelFont.dispose();
         splashLabelFont.dispose();
+    }
+
+    public void setChangeListener(){
+
+        singlePlayerButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new SingleplayerMenuScreen(game));
+            }
+        });
+
+        multiPlayerButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                multiPlayerButton.setText("Game Started");
+//                TODO Let the Game start the MultiPlayer Mode
+            }
+        });
+
+        settingsButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new SettingsScreen(game));
+            }
+        });
+
+
+        reportButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                Gdx.net.openURI("https://github.com/brogrammersteam/tartaros/issues");
+            }
+        });
+
+        quitButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                Gdx.app.exit();
+            }
+        });
     }
 }

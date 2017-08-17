@@ -8,11 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Settings;
@@ -202,9 +200,9 @@ public class SettingsScreen implements Screen {
         languageDialog.getContentTable().row();
         languageDialog.getContentTable().pad(50);
 
-        languageDialog.getButtonTable().add(languageSelectBox);
+        languageDialog.getButtonTable().add(languageSelectBox).expandX().align(Align.center).pad(20).width(200);
         languageDialog.getButtonTable().row();
-        languageDialog.getButtonTable().add(languageAcceptButton);
+        languageDialog.getButtonTable().add(languageAcceptButton).expandX().align(Align.center).pad(20).width(200);
         languageDialog.getButtonTable().pad(50);
 
         titleLabel.setAlignment(Align.center);
@@ -224,25 +222,9 @@ public class SettingsScreen implements Screen {
         table.row();
         table.add(impressumButton).expandX().padBottom(75).height(100).width(300).colspan(2);
 
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
-                Tartaros.mainSettings.flush();
-            }
-        });
-
-        resetAcceptButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
-                Tartaros.initializeSettings();
-            }
-        });
-
-
-
         languageSelectBox.setSelected(Tartaros.mainSettings.getString("language"));
+
+        setChangeListener();
     }
 
     @Override
@@ -264,7 +246,7 @@ public class SettingsScreen implements Screen {
             Settings.setSound(false);
         }
 
-        Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
+//        Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
     }
 
     private void update(float delta){
@@ -279,74 +261,6 @@ public class SettingsScreen implements Screen {
                 app.exit();
             }
         }
-
-        setClickListener();
-    }
-
-    private void setClickListener(){
-
-        audioAcceptButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                audioDialog.hide();
-            }
-        });
-
-        languageAcceptButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                languageDialog.hide();
-            }
-        });
-
-        impressumButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new ImpressumScreen(game));
-            }
-        });
-
-        resetButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                resetDialog.show(stage);
-            }
-        });
-
-        forceUpdateButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                forceUpdateButton.setText("No function");
-            }
-        });
-
-        audioButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                audioDialog.show(stage);
-            }
-        });
-
-        languageButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                languageDialog.show(stage);
-            }
-        });
-
-        musicVolumeSlider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Settings.setMusicVolume(musicVolumeSlider.getValue());
-            }
-        });
-
-        soundVolumeSlider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Settings.setSoundVolume(musicVolumeSlider.getValue());
-            }
-        });
     }
 
     @Override
@@ -378,5 +292,85 @@ public class SettingsScreen implements Screen {
         titleLabelFont.dispose();
         dialogLabelFont.dispose();
 
+    }
+
+    private void setChangeListener(){
+
+        languageButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                languageDialog.show(stage);
+            }
+        });
+
+        audioAcceptButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                audioDialog.hide();
+            }
+        });
+
+        languageAcceptButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                languageDialog.hide();
+            }
+        });
+
+        impressumButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new ImpressumScreen(game));
+            }
+        });
+
+        resetButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                resetDialog.show(stage);
+            }
+        });
+
+        forceUpdateButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                forceUpdateButton.setText("No function");
+            }
+        });
+
+        audioButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                audioDialog.show(stage);
+            }
+        });
+
+        musicVolumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Settings.setMusicVolume(musicVolumeSlider.getValue());
+            }
+        });
+
+        soundVolumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Settings.setSoundVolume(musicVolumeSlider.getValue());
+            }
+        });
+
+        backButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new MenuScreen(game));
+                Tartaros.mainSettings.flush();
+            }
+        });
+
+        resetAcceptButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new MenuScreen(game));
+                Tartaros.initializeSettings();
+            }
+        });
+
+        languageSelectBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
+            }
+        });
     }
 }

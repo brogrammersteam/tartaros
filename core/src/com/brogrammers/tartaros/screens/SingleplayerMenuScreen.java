@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -112,12 +114,7 @@ public class SingleplayerMenuScreen implements Screen {
         table.add(savegame2).expandX();
         table.add(savegame3).expandX();
 
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button){
-                game.setScreen(new MenuScreen(game));
-            }
-        });
+        setChangeListener();
     }
 
     @Override
@@ -168,5 +165,14 @@ public class SingleplayerMenuScreen implements Screen {
         backgroundTexture.dispose();
         generator.dispose();
         titleLabelFont.dispose();
+    }
+
+    public void setChangeListener(){
+
+        backButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor){
+                game.setScreen(new MenuScreen(game));
+            }
+        });
     }
 }
