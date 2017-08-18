@@ -105,7 +105,7 @@ public class SettingsScreen implements Screen {
 
         resetLabel = new Label("Bist du dir sicher das du das Spiel zurücksetzten willst ?", dialogLabelStyle);
         audioLabel = new Label("Ändere hier die Audioeinstellungen", dialogLabelStyle);
-        languageLabel = new Label("Ändere deine Sprache hier", dialogLabelStyle);
+        languageLabel = new Label("Wähle hier dein Sprachpaket", dialogLabelStyle);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -214,7 +214,6 @@ public class SettingsScreen implements Screen {
         table.add(titleLabel).expandX().padBottom(400).width(Tartaros.V_WIDTH - 100).center().colspan(2);
         table.row();
         table.add(audioButton).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
-        //table.add(audioCheckBox).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
         table.add(languageButton).expandX().padBottom(50).height(100).width(300).align(Align.left).padLeft(10);
         table.row();
         table.add(forceUpdateButton).expandX().padBottom(50).height(100).width(300).align(Align.right).padRight(10);
@@ -225,6 +224,7 @@ public class SettingsScreen implements Screen {
         languageSelectBox.setSelected(Tartaros.mainSettings.getString("language"));
 
         setChangeListener();
+        setLanguage(Settings.getLanguage());
     }
 
     @Override
@@ -372,5 +372,9 @@ public class SettingsScreen implements Screen {
                 Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
             }
         });
+    }
+
+    public void setLanguage(String language){
+
     }
 }

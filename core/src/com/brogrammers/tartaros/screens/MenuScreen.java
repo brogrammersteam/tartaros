@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.brogrammers.tartaros.Settings;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -135,7 +136,7 @@ public class MenuScreen implements Screen {
     public void show() {
         System.out.println("MENU");
 
-        setLanguage();
+        setLanguage(Settings.getLanguage());
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
@@ -197,25 +198,25 @@ public class MenuScreen implements Screen {
 
     }
 
-    private void setLanguage(){
+    private void setLanguage(String language){
 
         System.out.println("Set Languages");
 
-        if(Tartaros.mainSettings.getString("language").equals("German")){
+        if(language.equals("German")){
             System.out.println("German");
             singlePlayerButton.setText(singlePlayerText_de);
             multiPlayerButton.setText(multiPlayerText_de);
             settingsButton.setText(settingsText_de);
             reportButton.setText(reportText_de);
             quitButton.setText(exitText_de);
-        }else if (Tartaros.mainSettings.getString("language").equals("Bayrisch")){
+        }else if (language.equals("Bayrisch")){
             System.out.println("Bayrisch");
             singlePlayerButton.setText(singlePlayerText_bay);
             multiPlayerButton.setText(multiPlayerText_bay);
             settingsButton.setText(settingsText_bay);
             reportButton.setText(reportText_bay);
             quitButton.setText(exitText_bay);
-        }else if (Tartaros.mainSettings.getString("language").equals("English")){
+        }else if (language.equals("English")){
             System.out.println("English");
             singlePlayerButton.setText(singlePlayerText_en);
             multiPlayerButton.setText(multiPlayerText_en);
