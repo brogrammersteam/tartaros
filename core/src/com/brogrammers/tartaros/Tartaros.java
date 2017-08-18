@@ -27,7 +27,7 @@ public class Tartaros extends Game {
 	public static final int FPS = 60;
 
 	public static final boolean RESIZABLE = false;
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean DEVELOP = true;
     public static final boolean FULLSCREEN = true;
     public static final boolean VSYNC = true;
