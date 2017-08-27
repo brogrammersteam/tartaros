@@ -54,24 +54,24 @@ public class Tartaros extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
+		xmlHandler = new XmlHandler();
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 
 		mainSettings = Gdx.app.getPreferences("com.brogrammers.tartaros.mainSettings");
-
-		xmlHandler = new XmlHandler();
-		xmlHandler.setLanguageFile();
-
-		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
-		music.setLooping(true);
-		if(Settings.getMusic()) {
-			music.play();
-		}
-		music.setVolume(Settings.getMusicVolume());
 
 		if(mainSettings.getBoolean("initialised")){
 			System.out.println("Die Einstellungen wurden bereits initialisiert");
 		}else {
 			initializeSettings();
 		}
+
+		xmlHandler.setLanguageFile();
+
+		music.setLooping(true);
+		if(Settings.getMusic()) {
+			music.play();
+		}
+		music.setVolume(Settings.getMusicVolume());
 
 		addSplashs();
 
