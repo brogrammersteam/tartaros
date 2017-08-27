@@ -13,10 +13,10 @@
 
         <!-- Strings for Default View -->
         <string name="titleText" value="Einstellungen"/>
-        <string name="forceUpdateButtonText" value="Force Update"/>
+        <string name="forceUpdateButtonText" value="Update dozwinga"/>
         <string name="languageButtonText" value="Sprach"/>
         <string name="audioButtonText" value="Töne"/>
-        <string name="impressumButtonText" value="Eastäit vo"/>
+        <string name="impressumButtonText" value="Eastaeit vo"/>
         <string name="resetButtonText" value="Schbui zuaruggsetzn"/>
         <string name="backButtonText" value="Zruck"/>
         <!-- -->
@@ -29,11 +29,11 @@
         <!-- -->
 
         <!-- Strings for Audio Dialog View -->
-        <string name="audioDialogTitle" value="Töne"/>
-        <string name="audioText" value="Ändere do de Klangeinstäiunga"/>
+        <string name="audioDialogTitle" value="Toene"/>
+        <string name="audioText" value="Ändere do de Klangeinstaeiunga"/>
         <string name="audioAcceptButtonText" value="Bassd"/>
         <string name="musicCheckBoxText" value="Musi"/>
-        <string name="soundCheckBoxText" value="Geräusche"/>
+        <string name="soundCheckBoxText" value="Geraeusche"/>
         <!-- -->
 
         <!-- Strings for Language Dialog View -->
