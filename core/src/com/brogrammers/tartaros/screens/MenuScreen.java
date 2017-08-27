@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.brogrammers.tartaros.Settings;
 import com.brogrammers.tartaros.Tartaros;
 
 import static com.badlogic.gdx.Gdx.app;
@@ -26,25 +25,7 @@ public class MenuScreen implements Screen {
     private Stage stage;
     private Table table;
 
-    private static final String singlePlayerText_de = "Einzelspieler";
-    private static final String singlePlayerText_en = "Singleplayer";
-    private static final String singlePlayerText_bay = "Alloa";
-
-    private String multiPlayerText_de = "Mehrspieler";
-    private String multiPlayerText_en = "Multiplayer";
-    private String multiPlayerText_bay = "Mitanand";
-
-    private String settingsText_de = "Einstellungen";
-    private String settingsText_en = "Settings";
-    private String settingsText_bay = "Einstellungen";
-
-    private String reportText_de = "Probleme melden";
-    private String reportText_en = "Report to Github";
-    private String reportText_bay = "Was meckern";
-
-    private String exitText_de = "Beenden";
-    private String exitText_en = "Exit";
-    private String exitText_bay = "Raus da";
+    private String screenName = "menu";
 
     private Skin skin;
 
@@ -109,7 +90,7 @@ public class MenuScreen implements Screen {
         versionLabelStyle = new Label.LabelStyle(versionLabelFont, new Color(1,1,1,1));
         splashLabelStyle = new Label.LabelStyle(splashLabelFont, new Color(1,1,1,1));
 
-        titleLabel = new Label("Tartaros", titleLabelStyle);
+        titleLabel = new Label("", titleLabelStyle);
         titleLabel.setAlignment(Align.center);
 
         versionLabel = new Label("Version: " + Tartaros.VERSION, versionLabelStyle);
@@ -136,7 +117,7 @@ public class MenuScreen implements Screen {
     public void show() {
         System.out.println("MENU");
 
-        setLanguage(Settings.getLanguage());
+        setLanguage();
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
@@ -198,32 +179,16 @@ public class MenuScreen implements Screen {
 
     }
 
-    private void setLanguage(String language){
+    private void setLanguage(){
 
         System.out.println("Set Languages");
 
-        if(language.equals("German")){
-            System.out.println("German");
-            singlePlayerButton.setText(singlePlayerText_de);
-            multiPlayerButton.setText(multiPlayerText_de);
-            settingsButton.setText(settingsText_de);
-            reportButton.setText(reportText_de);
-            quitButton.setText(exitText_de);
-        }else if (language.equals("Bayrisch")){
-            System.out.println("Bayrisch");
-            singlePlayerButton.setText(singlePlayerText_bay);
-            multiPlayerButton.setText(multiPlayerText_bay);
-            settingsButton.setText(settingsText_bay);
-            reportButton.setText(reportText_bay);
-            quitButton.setText(exitText_bay);
-        }else if (language.equals("English")){
-            System.out.println("English");
-            singlePlayerButton.setText(singlePlayerText_en);
-            multiPlayerButton.setText(multiPlayerText_en);
-            settingsButton.setText(settingsText_en);
-            reportButton.setText(reportText_en);
-            quitButton.setText(exitText_en);
-        }
+        titleLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "titleText"));
+        singlePlayerButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "singlePlayerText"));
+        multiPlayerButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "multiPlayerText"));
+        settingsButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "settingsText"));
+        reportButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "reportText"));
+        quitButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "exitText"));
     }
 
     @Override

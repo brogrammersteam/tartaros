@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <menu>
+        <string name="titleText" value="Tartaros"/>
+        <string name="singlePlayerText" value="Alloa"/>
+        <string name="multiPlayerText" value="Mitanand"/>
+        <string name="settingsText" value="Einstellungen"/>
+        <string name="reportText" value="Wos meckern"/>
+        <string name="exitText" value="Raus do"/>
+    </menu>
+
+    <settings>
+
+    </settings>
+</resources>

@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
 
+import java.util.Set;
+
 public class Tartaros extends Game {
 
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
@@ -43,6 +45,7 @@ public class Tartaros extends Game {
     public AssetManager assets;
     public static Preferences mainSettings;
     public static Music music;
+    public static XmlHandler xmlHandler;
 
     @Override
 	public void create () {
@@ -53,6 +56,9 @@ public class Tartaros extends Game {
 		batch = new SpriteBatch();
 
 		mainSettings = Gdx.app.getPreferences("com.brogrammers.tartaros.mainSettings");
+
+		xmlHandler = new XmlHandler();
+		xmlHandler.setLanguageFile();
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 		music.setLooping(true);

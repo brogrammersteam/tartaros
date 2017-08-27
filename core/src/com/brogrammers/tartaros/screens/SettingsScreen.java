@@ -28,6 +28,8 @@ public class SettingsScreen implements Screen {
 
     private Skin skin;
 
+    private String screenName = "settings";
+
     private SelectBox languageSelectBox;
 
     private String[] languages;
@@ -99,13 +101,13 @@ public class SettingsScreen implements Screen {
         dialogLabelFont = generator.generateFont(dialogLabelParameter);
 
         titleLabelStyle = new Label.LabelStyle(titleLabelFont, new Color(1,1,1,1));
-        titleLabel = new Label("Einstellungen", titleLabelStyle);
+        titleLabel = new Label("", titleLabelStyle);
 
         dialogLabelStyle = new Label.LabelStyle(dialogLabelFont, new Color(1,1,1,1));
 
-        resetLabel = new Label("Bist du dir sicher das du das Spiel zurücksetzten willst ?", dialogLabelStyle);
-        audioLabel = new Label("Ändere hier die Audioeinstellungen", dialogLabelStyle);
-        languageLabel = new Label("Wähle hier dein Sprachpaket", dialogLabelStyle);
+        resetLabel = new Label("", dialogLabelStyle);
+        audioLabel = new Label("", dialogLabelStyle);
+        languageLabel = new Label("", dialogLabelStyle);
 
         backgroundTexture = game.assets.get("graphics/background_menu_new.png", Texture.class);
         backgroundImage = new Image(backgroundTexture);
@@ -115,19 +117,19 @@ public class SettingsScreen implements Screen {
         languageSelectBox = new SelectBox<String>(skin);
         languageSelectBox.setItems(languages);
 
-        resetButton = new TextButton("Reset Game", skin);
-        impressumButton = new TextButton("Created by", skin);
-        resetAcceptButton = new TextButton("Ok", skin);
-        resetRejectButton = new TextButton("Abbrechen", skin);
-        forceUpdateButton = new TextButton("Force Update", skin);
-        backButton = new TextButton("Back", skin);
-        audioButton = new TextButton("Audio", skin);
-        audioAcceptButton = new TextButton("Ok", skin);
-        languageButton = new TextButton("Language", skin);
-        languageAcceptButton = new TextButton("Ok", skin);
+        resetButton = new TextButton("", skin);
+        impressumButton = new TextButton("", skin);
+        resetAcceptButton = new TextButton("", skin);
+        resetRejectButton = new TextButton("", skin);
+        forceUpdateButton = new TextButton("", skin);
+        backButton = new TextButton("", skin);
+        audioButton = new TextButton("", skin);
+        audioAcceptButton = new TextButton("", skin);
+        languageButton = new TextButton("", skin);
+        languageAcceptButton = new TextButton("", skin);
 
-        musicCheckBox = new CheckBox("Music", skin);
-        soundCheckBox = new CheckBox("Sounds", skin);
+        musicCheckBox = new CheckBox("", skin);
+        soundCheckBox = new CheckBox("", skin);
 
         musicVolumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
         musicVolumeSlider.setValue(Settings.getMusicVolume());
@@ -143,6 +145,8 @@ public class SettingsScreen implements Screen {
     @Override
     public void show() {
         System.out.println("SETTINGS");
+
+        setLanguage();
 
         if (Settings.getMusic()){
             musicCheckBox.setChecked(true);
@@ -160,7 +164,8 @@ public class SettingsScreen implements Screen {
         backgroundImage.setPosition(0,0);
 
         backButton.setPosition(25,25);
-        backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
+        backButton.setSize(150,75);
+        backButton.getLabel().setAlignment(Align.center);
 
         resetButton.getLabel().setAlignment(Align.center);
         impressumButton.getLabel().setAlignment(Align.center);
@@ -224,7 +229,6 @@ public class SettingsScreen implements Screen {
         languageSelectBox.setSelected(Tartaros.mainSettings.getString("language"));
 
         setChangeListener();
-        setLanguage(Settings.getLanguage());
     }
 
     @Override
@@ -246,7 +250,6 @@ public class SettingsScreen implements Screen {
             Settings.setSound(false);
         }
 
-//        Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
     }
 
     private void update(float delta){
@@ -261,6 +264,36 @@ public class SettingsScreen implements Screen {
                 app.exit();
             }
         }
+    }
+
+    private void setLanguage(){
+
+        System.out.println("Set Languages");
+
+//        Default view
+        titleLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "titleText"));
+        resetButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "resetButtonText"));
+        languageButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "languageButtonText"));
+        forceUpdateButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "forceUpdateButtonText"));
+        audioButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "audioButtonText"));
+        impressumButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "impressumButtonText"));
+        backButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "backButtonText"));
+
+//        Reset Dialog view
+        resetLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "resetText"));
+        resetRejectButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "resetRejectButtonText"));
+        resetAcceptButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "resetAcceptButtonText"));
+
+//        Audio Dialog view
+        audioLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "audioText"));
+        audioAcceptButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "audioAcceptButtonText"));
+        musicCheckBox.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "musicCheckBoxText"));
+        soundCheckBox.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "soundCheckBoxText"));
+
+//        Language Dialog view
+        languageLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "languageText"));
+        languageAcceptButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "languageAcceptButton"));
+
     }
 
     @Override
@@ -370,11 +403,8 @@ public class SettingsScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Settings.setLanguage(languages[languageSelectBox.getSelectedIndex()]);
+                setLanguage();
             }
         });
-    }
-
-    public void setLanguage(String language){
-
     }
 }

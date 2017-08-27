@@ -1,5 +1,7 @@
 package com.brogrammers.tartaros;
 
+import com.badlogic.gdx.Gdx;
+
 public class Settings {
 
     public static void setMusic(boolean status){
@@ -42,10 +44,13 @@ public class Settings {
     public static void setLanguage(String language){
         if(language.equals("English")){
             Tartaros.mainSettings.putString("language", "English");
+            Tartaros.xmlHandler.setLanguageFile();
         }else if(language.equals("German")){
             Tartaros.mainSettings.putString("language", "German");
+            Tartaros.xmlHandler.setLanguageFile();
         }else if(language.equals("Bayrisch")){
             Tartaros.mainSettings.putString("language", "Bayrisch");
+            Tartaros.xmlHandler.setLanguageFile();
         }
 
         Tartaros.mainSettings.flush();

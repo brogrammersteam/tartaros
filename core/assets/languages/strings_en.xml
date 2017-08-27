@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <menu>
+        <string name="titleText" value="Tartaros"/>
+        <string name="singlePlayerText" value="Singleplayer"/>
+        <string name="multiPlayerText" value="Multiplayer"/>
+        <string name="settingsText" value="Settings"/>
+        <string name="reportText" value="Report to Github"/>
+        <string name="exitText" value="Exit"/>
+    </menu>
+
+    <settings>
+
+        <!-- Strings for Default View -->
+        <string name="titleText" value="Settings"/>
+        <string name="forceUpdateButtonText" value="Force Update"/>
+        <string name="languageButtonText" value="Language"/>
+        <string name="audioButtonText" value="Audio"/>
+        <string name="impressumButtonText" value="Created by"/>
+        <string name="resetButtonText" value="Reset Game"/>
+        <string name="backButtonText" value="Back"/>
+        <!-- -->
+
+        <!-- Strings for Reset Dialog View -->
+        <string name="resetDialogTitle" value="Reset Game"/>
+        <string name="resetText" value="Are you sure that you want to reset the whole game?"/>
+        <string name="resetAcceptButtonText" value="Yes I am"/>
+        <string name="resetRejectButtonText" value="No I'm not"/>
+        <!-- -->
+
+        <!-- Strings for Audio Dialog View -->
+        <string name="audioDialogTitle" value="Audio"/>
+        <string name="audioText" value="Change audio Settings here"/>
+        <string name="audioAcceptButtonText" value="Ok"/>
+        <string name="musicCheckBoxText" value="Music"/>
+        <string name="soundCheckBoxText" value="Sound"/>
+        <!-- -->
+
+        <!-- Strings for Language Dialog View -->
+        <string name="languageText" value="Change language package here"/>
+        <string name="languageDialogTitle" value="Language"/>
+        <string name="languageAcceptButton" value="Ok"/>
+        <!-- -->
+
+    </settings>
+</resources>
