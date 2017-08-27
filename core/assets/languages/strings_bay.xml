@@ -11,5 +11,36 @@
 
     <settings>
 
+        <!-- Strings for Default View -->
+        <string name="titleText" value="Einstellungen"/>
+        <string name="forceUpdateButtonText" value="Force Update"/>
+        <string name="languageButtonText" value="Sprach"/>
+        <string name="audioButtonText" value="Töne"/>
+        <string name="impressumButtonText" value="Eastäit vo"/>
+        <string name="resetButtonText" value="Schbui zuaruggsetzn"/>
+        <string name="backButtonText" value="Zruck"/>
+        <!-- -->
+
+        <!-- Strings for Reset Dialog View -->
+        <string name="resetDialogTitle" value="Schbui zuaruggsetzn"/>
+        <string name="resetText" value="Bisd du dia sicha, dass du des ganze Schbui zuaruggsetzn wuist?"/>
+        <string name="resetAcceptButtonText" value="Jo bin i"/>
+        <string name="resetRejectButtonText" value="Na bin i ned"/>
+        <!-- -->
+
+        <!-- Strings for Audio Dialog View -->
+        <string name="audioDialogTitle" value="Töne"/>
+        <string name="audioText" value="Ändere do de Klangeinstäiunga"/>
+        <string name="audioAcceptButtonText" value="Bassd"/>
+        <string name="musicCheckBoxText" value="Musi"/>
+        <string name="soundCheckBoxText" value="Geräusche"/>
+        <!-- -->
+
+        <!-- Strings for Language Dialog View -->
+        <string name="languageText" value="Ändere do de Sprach"/>
+        <string name="languageDialogTitle" value="Sprach"/>
+        <string name="languageAcceptButton" value="Bassd"/>
+        <!-- -->
+
     </settings>
 </resources>
