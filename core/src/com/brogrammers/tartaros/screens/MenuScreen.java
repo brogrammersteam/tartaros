@@ -125,8 +125,6 @@ public class MenuScreen implements Screen {
         versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, 800);
         versionLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
-        splashLabel.setText(Tartaros.xmlHandler.getSplashArray().random());
-
         container.setPosition(250, Tartaros.V_HEIGHT - 490 );
         container.setDebug(true);
         container.setTransform(true);
@@ -183,6 +181,7 @@ public class MenuScreen implements Screen {
 
         System.out.println("Set Languages");
 
+        splashLabel.setText(Tartaros.xmlHandler.getSplashArray().random());
         titleLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "titleText"));
         singlePlayerButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "singlePlayerText"));
         multiPlayerButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "multiPlayerText"));
