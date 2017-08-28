@@ -51,5 +51,7 @@
         <splash value="Be one with the game"/>
         <splash value="I can see you"/>
         <splash value="No no go there its a trick"/>
+        <splash value="You tried to start 'Heaven'. We've seen your life... Do you want to start 'Tartaros'?"/>
+
     </splashes>
 </resources>
