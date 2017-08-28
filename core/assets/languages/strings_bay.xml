@@ -48,8 +48,8 @@
 
     <prerelease>
         <string name="warningLabelText" value="Please consider that this is a Pre-Release Version of the Game."/>
-        <string name="tapLabelText" value="Tap the Screen or press Enter to get to the main screen"/>
-        <string name="versionLabelText" value="Current Version:"/>
+        <string name="tapLabelText" value="Beruehre den Buidschirm oda drugge Enter um zum Habtmenue zua keman"/>
+        <string name="versionLabelText" value="Aktuelle Vasion:"/>
     </prerelease>
 
     <splasher>
