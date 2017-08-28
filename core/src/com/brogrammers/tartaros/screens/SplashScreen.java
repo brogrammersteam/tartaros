@@ -24,7 +24,7 @@ public class SplashScreen implements Screen {
 
     private Stage stage;
 
-    private String infoString = "Please consider that this game was developed by a young group of programmers called BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems.";
+    private String screenName = "splasher";
 
     private Texture splashTexture;
     private Image splashImage;
@@ -70,8 +70,8 @@ public class SplashScreen implements Screen {
         tapLabelStyle = new Label.LabelStyle(tapLabelFont, new Color(1, 1, 1, 1));
 
 //        Initialising all the Labels
-        infoLabel = new Label(infoString, infoLabelStyle);
-        tapLabel = new Label("Tap the Screen or press Enter to get to the main screen", tapLabelStyle);
+        infoLabel = new Label(Tartaros.xmlHandler.getLanguageStrings(screenName, "infoLabelText"), infoLabelStyle);
+        tapLabel = new Label(Tartaros.xmlHandler.getLanguageStrings(screenName, "tapLabelText"), tapLabelStyle);
 
 //        Adding everything to the Stage
         stage.addActor(splashImage);

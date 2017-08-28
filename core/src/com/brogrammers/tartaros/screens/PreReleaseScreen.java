@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.brogrammers.tartaros.Tartaros;
 
@@ -20,6 +21,8 @@ public class PreReleaseScreen implements Screen {
     private final Tartaros game;
 
     private Stage stage;
+
+    private String screenName = "prerelease";
 
     private Label warningLabel;
     private Label tapLabel;
@@ -68,9 +71,9 @@ public class PreReleaseScreen implements Screen {
         versionLabelStyle = new Label.LabelStyle(versionLabelFont, new Color(1, 1, 1, 1));
 
 //        Initialising all the Labels
-        warningLabel = new Label("Please consider that this is a Pre-Release Version of the Game.", warningLabelStyle);
-        tapLabel = new Label("Tap the Screen or press Enter to get to the main screen", tapLabelStyle);
-        versionLabel = new Label("Current Version: " + Tartaros.VERSION, versionLabelStyle);
+        warningLabel = new Label(Tartaros.xmlHandler.getLanguageStrings(screenName, "warningLabelText"), warningLabelStyle);
+        tapLabel = new Label(Tartaros.xmlHandler.getLanguageStrings(screenName, "tapLabelText"), tapLabelStyle);
+        versionLabel = new Label(Tartaros.xmlHandler.getLanguageStrings(screenName, "versionLabelText") + " " + Tartaros.VERSION, versionLabelStyle);
 
 //        Adding everything to the Stage
         stage.addActor(warningLabel);
