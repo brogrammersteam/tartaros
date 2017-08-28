@@ -43,4 +43,16 @@
         <!-- -->
 
     </settings>
+
+
+    <splashes>
+        <splash value="Gengan se weida... Do gibt's nix zua seng"/>
+        <splash value="Wa bisd du?"/>
+        <splash value="HILFE! Hol mi da ausse!"/>
+        <splash value="Sei eins mid am Schbui"/>
+        <splash value="I siag di!"/>
+        <splash value="Schau do moi hi .... 's gibt oan Drick"/>
+    </splashes>
+
+
 </resources>
