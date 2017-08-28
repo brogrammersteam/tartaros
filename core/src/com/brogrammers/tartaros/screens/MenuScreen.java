@@ -125,7 +125,7 @@ public class MenuScreen implements Screen {
         versionLabel.setPosition((Tartaros.V_WIDTH - versionLabel.getWidth()) / 2, 800);
         versionLabel.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
 
-        splashLabel.setText(Tartaros.splashArray.random());
+        splashLabel.setText(Tartaros.xmlHandler.getSplashArray().random());
 
         container.setPosition(250, Tartaros.V_HEIGHT - 490 );
         container.setDebug(true);
@@ -232,7 +232,6 @@ public class MenuScreen implements Screen {
         multiPlayerButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor){
                 multiPlayerButton.setText("Game Started");
-//                TODO Let the Game start the MultiPlayer Mode
             }
         });
 

@@ -43,4 +43,13 @@
         <!-- -->
 
     </settings>
+
+    <splashes>
+        <splash value="Go away nothing is here"/>
+        <splash value="Who are you"/>
+        <splash value="Can you help me"/>
+        <splash value="Be one with the game"/>
+        <splash value="I can see you"/>
+        <splash value="No no go there its a trick"/>
+    </splashes>
 </resources>

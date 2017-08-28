@@ -93,8 +93,8 @@ public class SingleplayerMenuScreen implements Screen {
         backgroundImage.setPosition(0,0);
 
         backButton.setPosition(25,25);
-        backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
-        backButton.addAction(sequence(alpha(Tartaros.alphaStart), fadeIn(Tartaros.fadeTime)));
+        backButton.setSize(150,75);
+        backButton.getLabel().setAlignment(Align.center);
 
         titleLabel.setPosition((Tartaros.V_WIDTH - titleLabel.getWidth()) / 2, Tartaros.V_HEIGHT - titleLabel.getHeight() + 125);
         titleLabel.setSize(titleLabel.getWidth(), titleLabel.getHeight());

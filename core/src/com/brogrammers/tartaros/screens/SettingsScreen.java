@@ -131,10 +131,10 @@ public class SettingsScreen implements Screen {
         musicCheckBox = new CheckBox("", skin);
         soundCheckBox = new CheckBox("", skin);
 
-        musicVolumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        musicVolumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
         musicVolumeSlider.setValue(Settings.getMusicVolume());
 
-        soundVolumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        soundVolumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
         soundVolumeSlider.setValue(Settings.getSoundVolume());
 
         stage.addActor(backgroundImage);

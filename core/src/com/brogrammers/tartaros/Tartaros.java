@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.brogrammers.tartaros.screens.LoadingScreen;
 
-import java.util.Set;
-
 public class Tartaros extends Game {
 
 	public static final String TITLE = "Tartaros - Das Spiel der Spiele";
@@ -36,8 +34,6 @@ public class Tartaros extends Game {
 
 	public static final float alphaStart = 0f;
 	public static final float fadeTime = 1.75f;
-
-	public static final Array<String> splashArray = new Array<String>();
 
 	public OrthographicCamera camera;
 
@@ -73,8 +69,6 @@ public class Tartaros extends Game {
 		}
 		music.setVolume(Settings.getMusicVolume());
 
-		addSplashs();
-
 //		  Setting the first Screen
 		this.setScreen(new LoadingScreen(this));
 	}
@@ -94,7 +88,7 @@ public class Tartaros extends Game {
 		super.dispose();
 	}
 
-	public static void initializeSettings(){
+	public static void initializeSettings() {
 		System.out.println("Initialise");
 
 		mainSettings.putBoolean("initialised", true);
@@ -102,8 +96,8 @@ public class Tartaros extends Game {
 		Settings.setLanguage("English");
 
 		Settings.setSavegameName(1, "Savegame1");
-        Settings.setSavegameName(2, "Savegame2");
-        Settings.setSavegameName(3, "Savegame3");
+		Settings.setSavegameName(2, "Savegame2");
+		Settings.setSavegameName(3, "Savegame3");
 
 		Settings.setMusic(true);
 		Settings.setMusicVolume(1f);
@@ -116,15 +110,6 @@ public class Tartaros extends Game {
 
 		mainSettings.putBoolean("savegame3initialised", false);
 
-    	mainSettings.flush();
-	}
-
-	private void addSplashs(){
-		splashArray.add("No no go there its a trick");
-		splashArray.add("I can see you");
-		splashArray.add("Be one with the game");
-		splashArray.add("Can you help me");
-		splashArray.add("Who are you");
-		splashArray.add("Go away nothing is here");
+		mainSettings.flush();
 	}
 }

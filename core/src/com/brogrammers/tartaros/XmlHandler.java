@@ -13,9 +13,12 @@ public class XmlHandler {
     private XmlReader.Element languageXmlRoot;
     private XmlReader.Element languageXmlResources;
 
+    private Array<String> splashArray;
+
     public XmlHandler(){
 
         languageXml = new XmlReader();
+        splashArray = new Array<String>();
 
     }
 
@@ -53,5 +56,18 @@ public class XmlHandler {
 
         return ("String not found");
 
+    }
+
+    public Array<String> getSplashArray(){
+
+        languageXmlResources = languageXmlRoot.getChildByName("splashes");
+
+        Array<XmlReader.Element> splashes = languageXmlResources.getChildrenByName("splash");
+
+        for(XmlReader.Element splashesBuffer : splashes){
+            splashArray.add(splashesBuffer.get("value"));
+        }
+
+        return splashArray;
     }
 }

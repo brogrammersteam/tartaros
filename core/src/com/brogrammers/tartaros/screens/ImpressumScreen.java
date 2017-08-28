@@ -64,6 +64,8 @@ public class ImpressumScreen implements Screen {
 
     private TextButton backButton;
 
+//    TODO Add multilingual to this screen
+
     public ImpressumScreen(final Tartaros game){
         this.game = game;
 
@@ -135,7 +137,7 @@ public class ImpressumScreen implements Screen {
         backgroundImage.setPosition(0,0);
 
         backButton.setPosition(25,25);
-        backButton.setSize(backButton.getLabel().getWidth() + 20,backButton.getLabel().getHeight() + 20);
+        backButton.setSize(150,75);
         backButton.getLabel().setAlignment(Align.center);
 
         textLabel.setWrap(true);
