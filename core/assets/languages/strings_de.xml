@@ -17,20 +17,20 @@
         <string name="languageButtonText" value="Sprache"/>
         <string name="audioButtonText" value="Audio"/>
         <string name="impressumButtonText" value="Created by"/>
-        <string name="resetButtonText" value="Spiel zurücksetzen"/>
-        <string name="backButtonText" value="Zurück"/>
+        <string name="resetButtonText" value="Spiel zuruecksetzen"/>
+        <string name="backButtonText" value="Zurueck"/>
         <!-- -->
 
         <!-- Strings for Reset Dialog View -->
-        <string name="resetDialogTitle" value="Spiel zurücksetzen"/>
-        <string name="resetText" value="Bist du dir sicher das du das Spiel zurücksetzten willst ?"/>
+        <string name="resetDialogTitle" value="Spiel zuruecksetzen"/>
+        <string name="resetText" value="Bist du dir sicher das du das Spiel zuruecksetzten willst ?"/>
         <string name="resetAcceptButtonText" value="Ja bin ich"/>
         <string name="resetRejectButtonText" value="Nein lieber nicht"/>
         <!-- -->
 
         <!-- Strings for Audio Dialog View -->
         <string name="audioDialogTitle" value="Audio"/>
-        <string name="audioText" value="Ändere hier deine Audioeinstellungen"/>
+        <string name="audioText" value="Aendere hier deine Audioeinstellungen"/>
         <string name="audioAcceptButtonText" value="Ok"/>
         <string name="musicCheckBoxText" value="Musik"/>
         <string name="soundCheckBoxText" value="Sound"/>
