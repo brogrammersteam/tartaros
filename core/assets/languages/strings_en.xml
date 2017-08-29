@@ -55,6 +55,13 @@
         <string name="tapLabelText" value="Tap the Screen or press Enter to get to the main screen"/>
     </splasher>
 
+    <impressum>
+        <string name="headerLabelText" value="Created by:"/>
+        <string name="thanksLabelText" value="Ein riesen Dankeschön geht hierbei an die Code+Design Initiative."/>
+        <string name="textLabelText" value="Dies ist ein Projekt, welches uns sehr am Herzen liegt. Es entsteht, dank der Code+Design Initiative! Wir möchten ein Spiel entwickeln, welches so ergreifend ist, dass man es nicht mehr loslassen möchte. Man soll darin so gefangen sein wie im Tartaros, der mystischen Unterwelt der Götterwelt des antiken Griechenlands. Die Kernfrage ist: Beobachtet dich Tartaros oder beobachtest du Ihn?"/>
+        <string name="backButtonText" value="Back"/>
+    </impressum>
+
     <splashes>
         <splash value="Go away nothing is here"/>
         <splash value="Who are you"/>

@@ -27,8 +27,7 @@ public class ImpressumScreen implements Screen {
 
     private Skin skin;
 
-    private String impressumText = "Dies ist ein Projekt, welches uns sehr am Herzen liegt. Es entsteht, dank der Code+Design Initiative! Wir möchten ein Spiel entwickeln, welches so ergreifend ist, dass man es nicht mehr loslassen möchte. Man soll darin so gefangen sein wie im Tartaros, der mystischen Unterwelt der Götterwelt des antiken Griechenlands. Die Kernfrage ist: Beobachtet dich Tartaros oder beobachtest du Ihn?";
-    private String thanksText = "Ein riesen Dankeschön geht hierbei an die Code+Design Initiative.";
+    private String screenName = "impressum";
 
     private Texture backgroundTexture;
     private Image backgroundImage;
@@ -64,7 +63,6 @@ public class ImpressumScreen implements Screen {
 
     private TextButton backButton;
 
-//    TODO Add multilingual to this screen
 
     public ImpressumScreen(final Tartaros game){
         this.game = game;
@@ -109,7 +107,7 @@ public class ImpressumScreen implements Screen {
         textLabelStyle = new Label.LabelStyle(textLabelFont, new Color(1,1,1,1));
         thanksLabelStyle = new Label.LabelStyle(thanksLabelFont, new Color(1,1,1,1));
 
-        headerLabel = new Label("Created by:", headerLabelStyle);
+        headerLabel = new Label("", headerLabelStyle);
 
         sebastianLabel = new Label("Sebastian Schmailzl", developerLabelStyle);
         adrianLabel = new Label("Adrian Beckmann", developerLabelStyle);
@@ -119,10 +117,10 @@ public class ImpressumScreen implements Screen {
         adrianJobLabel = new Label("Master of Design", jobLabelStyle);
         moritzJobLabel = new Label("Master of Desaster", jobLabelStyle);
 
-        textLabel = new Label(impressumText, textLabelStyle);
-        thanksLabel = new Label(thanksText, thanksLabelStyle);
+        textLabel = new Label("", textLabelStyle);
+        thanksLabel = new Label("", thanksLabelStyle);
 
-        backButton = new TextButton("Back", skin);
+        backButton = new TextButton("", skin);
 
         stage.addActor(backgroundImage);
         stage.addActor(backButton);
@@ -132,6 +130,8 @@ public class ImpressumScreen implements Screen {
     @Override
     public void show() {
         System.out.println("IMPRESSUM");
+
+        setLanguage();
 
         backgroundImage.setSize(Tartaros.V_WIDTH, Tartaros.V_HEIGHT);
         backgroundImage.setPosition(0,0);
@@ -193,6 +193,17 @@ public class ImpressumScreen implements Screen {
                 app.exit();
             }
         }
+    }
+
+    private void setLanguage(){
+
+        System.out.println("Set Languages");
+
+        headerLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "headerLabelText"));
+        textLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "textLabelText"));
+        thanksLabel.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "thanksLabelText"));
+        backButton.setText(Tartaros.xmlHandler.getLanguageStrings(screenName, "backButtonText"));
+
     }
 
     @Override
