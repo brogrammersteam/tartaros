@@ -52,7 +52,7 @@
     </prerelease>
 
     <splasher>
-        <string name="infoLabelText" value="Bitte berücksichtige, dass dieses Spiel von einer jungen Programmierergruppe namens BROgrammers geschrieben wurde. Wir wollen, dass du mit dem Spiel eins wirst. Wenn du irgendwelche Bugs oder Probleme findest sags uns auf unserem Github Repository. Danke, dass du uns hilfst Probleme und Bugs zu finden"/>
+        <string name="infoLabelText" value="Bitte berücksichtige, dass dieses Spiel von einer jungen Programmierergruppe namens BROgrammers geschrieben wurde. Wir wollen, dass du mit dem Spiel eins wirst. Wenn du irgendwelche Bugs oder Probleme findest sags uns auf unserem Github Repository. Danke, dass du uns hilfst Probleme und Bugs zu finde"/>
         <string name="tapLabelText" value="Beruehre den Bildschirm oder druecke Enter um zum Hauptmenue zu kommen"/>
     </splasher>
 

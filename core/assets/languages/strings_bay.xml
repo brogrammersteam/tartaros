@@ -47,14 +47,14 @@
 
 
     <prerelease>
-        <string name="warningLabelText" value="Please consider that this is a Pre-Release Version of the Game."/>
+        <string name="warningLabelText" value="Bitte beachte, dass des a no unvaöffentlichte und gschlossene Vasion is."/>
         <string name="tapLabelText" value="Beruehre den Buidschirm oda drugge Enter um zum Habtmenue zua keman"/>
         <string name="versionLabelText" value="Aktuelle Vasion:"/>
     </prerelease>
 
     <splasher>
-        <string name="infoLabelText" value="Please consider that this game was developed by a young group of programmers called BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems."/>
-        <string name="tapLabelText" value="Tap the Screen or press Enter to get to the main screen"/>
+        <string name="infoLabelText" value="Bitte beruggsichtige, dass dess Schbui vo oana junga Programmierergruppn namans BROgrammers gschriebn wurde. Mia woin, dass du mid am Schbui eins wirst. Wenn du irgendwelche Bugs oda Probleme findest sogs uns auf unsam Github Repositoay. Measse, dass du uns hilfst Probleme und Bugs zua findn "/>
+        <string name="tapLabelText" value="Beruehre den Buidschirm oda drugge Enter um zum Habtmenue zua keman"/>
     </splasher>
 
     <splashes>
