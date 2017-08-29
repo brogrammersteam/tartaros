@@ -2,6 +2,7 @@ package com.brogrammers.tartaros.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Texture;
 import com.brogrammers.tartaros.Tartaros;
 
 public class DesktopLauncher {
@@ -15,8 +16,6 @@ public class DesktopLauncher {
 		config.fullscreen = Tartaros.FULLSCREEN;
 		config.resizable = Tartaros.RESIZABLE;
 		config.vSyncEnabled = Tartaros.VSYNC;
-//		config.addIcon();
-//		TODO Create Icon @Designer-Team
 		new LwjglApplication(new Tartaros(), config);
 	}
 }

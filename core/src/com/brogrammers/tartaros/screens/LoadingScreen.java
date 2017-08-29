@@ -140,7 +140,7 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssests(){
-        game.assets.load("badlogic.jpg", Texture.class);
+        game.assets.load("graphics/brogrammers/logo_klein.png", Texture.class);
         game.assets.load("graphics/background_menu_new.png", Texture.class);
         game.assets.load("skin/menu/menu.atlas", TextureAtlas.class);
         game.assets.load("skin/menu/menu.json", Skin.class, new SkinLoader.SkinParameter("skin/menu/menu.atlas"));

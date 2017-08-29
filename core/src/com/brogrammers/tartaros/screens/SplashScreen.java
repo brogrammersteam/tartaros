@@ -49,8 +49,7 @@ public class SplashScreen implements Screen {
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fiolex_Mephisto.ttf"));
 
-        splashTexture = game.assets.get("badlogic.jpg", Texture.class);
-//        TODO Change out the Logo by our own
+        splashTexture = game.assets.get("graphics/brogrammers/logo_klein.png", Texture.class);
         splashImage = new Image(splashTexture);
 
 //        Setting the infoLabelParameter
