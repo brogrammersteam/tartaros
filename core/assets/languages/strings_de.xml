@@ -46,14 +46,14 @@
 
 
     <prerelease>
-        <string name="warningLabelText" value="Please consider that this is a Pre-Release Version of the Game."/>
+        <string name="warningLabelText" value="Bitte beachte, dass dies eine noch unveröffentlichte und geschlossene Version ist."/>
         <string name="tapLabelText" value="Beruehre den Bildschirm oder druecke Enter um zum Hauptmenue zu kommen"/>
         <string name="versionLabelText" value="Aktuelle Version:"/>
     </prerelease>
 
     <splasher>
-        <string name="infoLabelText" value="Please consider that this game was developed by a young group of programmers called BROgrammers. We want you to become one with the game and the game to become one with you. If you find any Problems or Bugs go to our Github Repository and tell us about them. Thank you for helping us finding Bugs and Problems."/>
-        <string name="tapLabelText" value="Tap the Screen or press Enter to get to the main screen"/>
+        <string name="infoLabelText" value="Bitte berücksichtige, dass dieses Spiel von einer jungen Programmierergruppe namens BROgrammers geschrieben wurde. Wir wollen, dass du mit dem Spiel eins wirst. Wenn du irgendwelche Bugs oder Probleme findest sags uns auf unserem Github Repository. Danke, dass du uns hilfst Probleme und Bugs zu finden"/>
+        <string name="tapLabelText" value="Beruehre den Bildschirm oder druecke Enter um zum Hauptmenue zu kommen"/>
     </splasher>
 
     <splashes>
